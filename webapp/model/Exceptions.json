@@ -1,0 +1,8 @@
+[{
+	"type": "Warning",
+	"area": "Frozen Foods",
+	"message": "Some warning message",
+	"status": "Warning",
+	"text": "Additional warning text",
+	"expiresOn": "Mar 10, 2021"
+}]

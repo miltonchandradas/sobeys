@@ -1,0 +1,31 @@
+[{
+	"id": "G1",
+	"name": "GROCERY"
+}, {
+	"id": "G2",
+	"name": "NON-ALCOHOLIC BEVERAGES"
+}, {
+	"id": "G3",
+	"name": "ALCOHOLIC BEVERAGES"
+}, {
+	"id": "G4",
+	"name": "PET FOODS"
+}, {
+	"id": "G5",
+	"name": "ORGANIC PRODUCE"
+}, {
+	"id": "G6",
+	"name": "FROZEN PRODUCTS"
+}, {
+	"id": "G7",
+	"name": "DAIRY"
+}, {
+	"id": "G8",
+	"name": "SNACKS"
+}, {
+	"id": "G9",
+	"name": "BAKERY"
+}, {
+	"id": "G10",
+	"name": "COSMETICS"
+}]

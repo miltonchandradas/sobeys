@@ -1,0 +1,159 @@
+<mvc:View controllerName="com.sap.sobeys.controller.Master" xmlns="sap.m" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:layout="sap.ui.layout" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:microChart="sap.suite.ui.microchart">
+	<f:DynamicPage id="dynamicPageId" headerExpanded="true" toggleHeaderOnTitleClick="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<HBox>
+						<f:Avatar src="sap-icon://product" displaySize="XS" displayShape="Circle" backgroundColor="Random" class="sapUiTinyMarginEnd"/>
+						<Title text="SOBEYS FnR Purchase Orders"/>
+					</HBox>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="true">
+					<fb:filterGroupItems>
+						<fb:FilterGroupItem name="A" groupName="A" label="Department" visibleInFilterBar="true">
+							<fb:control>
+								<ComboBox id="slDepartment" showSecondaryValues="true" items="{ path: 'departmentModel>/' }">
+									<core:ListItem key="{departmentModel>id}" text="{departmentModel>name}" additionalText="{departmentModel>id}"/>
+								</ComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="filterItem1" groupName="basicFilter" label="Receiving Location" visibleInFilterBar="true">
+							<fb:control>
+								<MultiComboBox selectedKeys="101,102,103" selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
+									<core:ListItem key="101" text="Warehouse 1" additionalText="101"/>
+									<core:ListItem key="102" text="Warehouse 2" additionalText="102"/>
+									<core:ListItem key="103" text="Warehouse 3" additionalText="103"/>
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="filterItem2" groupName="basicFilter" label="Supplying Location" visibleInFilterBar="true">
+							<fb:control>
+								<MultiComboBox selectedKeys="101,102" selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
+									<core:ListItem key="101" text="Supplier A" additionalText="101"/>
+									<core:ListItem key="102" text="Supplier B" additionalText="102"/>
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="dateFilterItem1" groupName="basicFilter" label="Order Date" visibleInFilterBar="true">
+							<fb:control>
+								<DatePicker value="{path: 'dateModel>/orderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"></DatePicker>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="dateFilterItem2" groupName="basicFilter" label="Delivery Date" visibleInFilterBar="true">
+							<fb:control>
+								<DatePicker value="{path: 'dateModel>/orderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"></DatePicker>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="filterItem3" groupName="basicFilter" label="Status" visibleInFilterBar="true">
+							<fb:control>
+								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
+									<core:ListItem key="101" text="Created Automatically" additionalText="101"/>
+									<core:ListItem key="102" text="Pending Review" additionalText="102"/>
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="filterItem4" groupName="basicFilter" label="Exceptions" visibleInFilterBar="true">
+							<fb:control>
+								<MultiComboBox selectedKeys="101,102" selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
+									<core:ListItem key="101" text="Neutral" additionalText="101"/>
+									<core:ListItem key="102" text="Warning" additionalText="102"/>
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+					</fb:filterGroupItems>
+				</fb:FilterBar>
+			</f:DynamicPageHeader>
+		</f:header>
+		<!-- DynamicPage Content -->
+		<f:content>
+			<VBox fitContainer="true">
+				<Table id="contractsTable" inset="false" items="{ path: '/' }" class="sapFDynamicPageAlignContent" width="auto" mode="MultiSelect"
+					alternateRowColors="true" selectionChange=".onSelectionChange">
+					<headerToolbar>
+						<OverflowToolbar>
+							<content>
+								<Title text="Planned Purchase Orders (100)" level="H2"/>
+							</content>
+							<ToolbarSpacer/>
+							<Button id="btnCopy" icon="sap-icon://copy" text="Create Purchase Order" enabled="false" press=".onApproveOrder"/>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column>
+							<Text text="Planned Order"/>
+						</Column>
+						<Column minScreenWidth="Desktop">
+							<Text text="Receiving Location"/>
+						</Column>
+						<Column minScreenWidth="Desktop">
+							<Text text="Order Date"/>
+						</Column>
+						<Column minScreenWidth="Desktop" hAlign="Center">
+							<Text text="Planned Order Quantity"/>
+						</Column>
+						<Column minScreenWidth="Desktop">
+							<Text text="Delivery Date"/>
+						</Column>
+						<Column minScreenWidth="Desktop">
+							<Text text="Available Date"/>
+						</Column>
+						<Column>
+							<Text text="Supplying Location"/>
+						</Column>
+						<Column>
+							<Text text="Status"/>
+						</Column>
+						<Column>
+							<Text text="Exceptions"/>
+						</Column>
+						<Column>
+							<Text text="Actions"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem type="Navigation" press=".onListItemPress">
+							<cells>
+								<ObjectIdentifier title="{id}"/>
+								<ObjectIdentifier title="{receivingLocationId}" text="{receivingLocation}"></ObjectIdentifier>
+								<Text
+									text="{path: 'orderDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSX'}, style: 'medium', UTC: true } }"/>
+								<ObjectNumber
+									number="{ parts:[ {path:'orderQuantity'}, {path: 'units'} ], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false} }"
+									unit="{units}"/>
+								<Text
+									text="{path: 'deliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSX'}, style: 'medium', UTC: true } }"/>
+								<Text
+									text="{path: 'availabilityDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSX'}, style: 'medium', UTC: true } }"/>
+								<Text text="{supplyingLocation}"/>
+								<ObjectStatus text="{status}" state="{path: 'status' , formatter: '.formatter.statusText' }"/>
+								<microChart:StackedBarMicroChart size="Responsive" press="press">
+									<microChart:bars>
+										<microChart:StackedBarMicroChartBar value="{success}" valueColor="green"/>
+										<microChart:StackedBarMicroChartBar value="{warning}" valueColor="orange"/>
+										<microChart:StackedBarMicroChartBar value="{error}" valueColor="red"/>
+									</microChart:bars>
+								</microChart:StackedBarMicroChart>
+								<Button text="Approve" enabled="{path:'status' , formatter: '.formatter.actionEnabled' }" press=".onApproveContractPress"></Button>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</f:content>
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Accept"/>
+				<Button type="Reject" text="Reject"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>
