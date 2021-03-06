@@ -1,7 +1,7 @@
 <mvc:View controllerName="com.sap.sobeys.controller.Detail" xmlns:uxap="sap.uxap" xmlns="sap.m" xmlns:f="sap.f"
 	xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
 	<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false"
-		preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false" useIconTabBar="false">
+		preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false" useIconTabBar="false" showFooter="true">
 		<uxap:headerTitle>
 			<uxap:ObjectPageDynamicHeaderTitle>
 				<uxap:expandedHeading>
@@ -94,6 +94,14 @@
 											<content>
 												<Title text="Products (10)" level="H2"/>
 											</content>
+                                            <ToolbarSpacer/>
+                                            <Switch  state="{viewModel>/canEdit}" customTextOn="Edit" customTextOff="Edit">
+                                            
+								<layoutData>
+									<FlexItemData growFactor="1"/>
+								</layoutData>
+							</Switch>
+                            <Button icon="sap-icon://save" text="Save" press=".onSave"></Button>
 										</OverflowToolbar>
 									</headerToolbar>
 									<columns>
@@ -102,6 +110,9 @@
 										</Column>
 										<Column minScreenWidth="Desktop">
 											<Text text="Size"/>
+										</Column>
+                                        <Column minScreenWidth="Desktop">
+											<Text text="Planned Quantity"/>
 										</Column>
 										<Column hAlign="Right">
 											<Text text="List Price"/>
@@ -117,10 +128,11 @@
 										</Column>
 									</columns>
 									<items>
-										<ColumnListItem>
+										<ColumnListItem highlight="{itemModel>highlight}">
 											<cells>
 												<ObjectIdentifier title="{itemModel>description}" text="{itemModel>id}"/>
 												<Text text="{itemModel>size}"/>
+                                                <Input  value="{itemModel>quantity}" enabled="{viewModel>/canEdit}" valueState="{itemModel>highlight}" change=".onQuantityChange"></Input>
 												<ObjectNumber
 													number="{ parts:[ {path:'itemModel>listprice'}, {path:'itemModel>currencycode'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 													unit="{itemModel>currencycode}"/>
@@ -211,5 +223,14 @@
 				</uxap:subSections>
 			</uxap:ObjectPageSection>
 		</uxap:sections>
+	<uxap:footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Approve"
+					 press=".onApprove"/>
+				<Button type="Reject" text="Cancel" press=".onCancel"/>
+			</OverflowToolbar>
+		</uxap:footer>
 	</uxap:ObjectPageLayout>
+    
 </mvc:View>

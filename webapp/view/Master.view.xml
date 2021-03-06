@@ -113,9 +113,9 @@
 						<Column>
 							<Text text="Exceptions"/>
 						</Column>
-						<Column>
+						<!-- <Column>
 							<Text text="Actions"/>
-						</Column>
+						</Column> -->
 					</columns>
 					<items>
 						<ColumnListItem type="Navigation" press=".onListItemPress">
@@ -140,7 +140,7 @@
 										<microChart:StackedBarMicroChartBar value="{error}" valueColor="red"/>
 									</microChart:bars>
 								</microChart:StackedBarMicroChart>
-								<Button text="Approve" enabled="{path:'status' , formatter: '.formatter.actionEnabled' }" press=".onApproveContractPress"></Button>
+								<!-- <Button text="Approve" enabled="{path:'status' , formatter: '.formatter.actionEnabled' }" press=".onApproveContractPress"></Button> -->
 							</cells>
 						</ColumnListItem>
 					</items>
