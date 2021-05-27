@@ -27,47 +27,140 @@
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem1" groupName="basicFilter" label="Receiving Location" visibleInFilterBar="true">
 							<fb:control>
-								<MultiComboBox selectedKeys="101,102,103" selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
-									<core:ListItem key="101" text="Warehouse 1" additionalText="101"/>
-									<core:ListItem key="102" text="Warehouse 2" additionalText="102"/>
-									<core:ListItem key="103" text="Warehouse 3" additionalText="103"/>
+								<MultiComboBox selectedKeys="000001,000002,000005" selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
+									<core:ListItem key="000001" text="Warehouse A" additionalText="1"/>
+									<core:ListItem key="000002" text="Warehouse B" additionalText="2"/>
+									<core:ListItem key="000003" text="Warehouse C" additionalText="3"/>
+									<core:ListItem key="000004" text="Warehouse D" additionalText="4"/>
+									<core:ListItem key="000005" text="Warehouse E" additionalText="5"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
-						<fb:FilterGroupItem name="filterItem2" groupName="basicFilter" label="Supplying Location" visibleInFilterBar="true">
+						<fb:FilterGroupItem name="filterItem2" groupName="basicFilter" label="Supplying Location" visibleInFilterBar="false">
 							<fb:control>
-								<MultiComboBox selectedKeys="101,102" selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
-									<core:ListItem key="101" text="Supplier A" additionalText="101"/>
-									<core:ListItem key="102" text="Supplier B" additionalText="102"/>
-								</MultiComboBox>
+								<MultiComboBox selectedKeys="000001,000003,000005" selectionChange=".onFilterChange" showSecondaryValues="true">
+								    <core:ListItem key="000001" text="Toronto" additionalText="1"/>
+									<core:ListItem key="000002" text="Montreal" additionalText="2"/>
+									<core:ListItem key="000003" text="Ottawa" additionalText="3"/>
+									<core:ListItem key="000004" text="Stellarton" additionalText="4"/>
+									<core:ListItem key="000005" text="Dartmouth" additionalText="5"/>
+									</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="dateFilterItem1" groupName="basicFilter" label="Order Date" visibleInFilterBar="true">
 							<fb:control>
-								<DatePicker value="{path: 'dateModel>/orderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
+								<DatePicker value="{path: 'dateModel>/OrderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="dateFilterItem2" groupName="basicFilter" label="Delivery Date" visibleInFilterBar="true">
 							<fb:control>
-								<DatePicker value="{path: 'dateModel>/orderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
+								<DatePicker value="{path: 'dateModel>/DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem3" groupName="basicFilter" label="Status" visibleInFilterBar="true">
 							<fb:control>
-								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
-									<core:ListItem key="101" text="Created Automatically" additionalText="101"/>
-									<core:ListItem key="102" text="Pending Review" additionalText="102"/>
+								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
+									<core:ListItem key="101" text="Ready" />
+									<core:ListItem key="102" text="Review" />
+									<core:ListItem key="103" text="Urgent Review" />
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem4" groupName="basicFilter" label="Exceptions" visibleInFilterBar="true">
 							<fb:control>
-								<MultiComboBox selectedKeys="101,102" selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
+								<MultiComboBox selectedKeys="101,102" selectionChange=".onFilterChange" showSecondaryValues="true">
 									<core:ListItem key="101" text="Neutral" additionalText="101"/>
 									<core:ListItem key="102" text="Warning" additionalText="102"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
+                        <fb:FilterGroupItem name="filterItem5" groupName="basicFilter" label="Temp Zone" visibleInFilterBar="false">
+							<fb:control>
+								<MultiComboBox selectionChange=".onFilterChange" showSecondaryValues="false">
+									<core:ListItem key="101" text="Normal" />
+									<core:ListItem key="102" text="Refrigerated" />
+									<core:ListItem key="103" text="Frozen" />
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="filterItem6" groupName="basicFilter" label="Supplier Number" visibleInFilterBar="false">
+							<fb:control>
+								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
+									<core:ListItem key="101" text="000001" />
+									<core:ListItem key="102" text="000002" />
+									<core:ListItem key="103" text="000003" />
+									<core:ListItem key="103" text="000004" />
+									<core:ListItem key="103" text="000005" />
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="filterItem7" groupName="basicFilter" label="Supplier Name" visibleInFilterBar="false">
+							<fb:control>
+								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
+									<core:ListItem key="101" text="Supplier A" />
+									<core:ListItem key="102" text="Supplier B" />
+									<core:ListItem key="103" text="Supplier C" />
+									<core:ListItem key="103" text="Supplier D" />
+									<core:ListItem key="103" text="Supplier E" />
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="filterItem8" groupName="basicFilter" label="VSR #" visibleInFilterBar="false">
+							<fb:control>
+								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
+									<core:ListItem key="101" text="Supplier A" />
+									<core:ListItem key="102" text="Supplier B" />
+									<core:ListItem key="103" text="Supplier C" />
+									<core:ListItem key="103" text="Supplier D" />
+									<core:ListItem key="103" text="Supplier E" />
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="filterItem9" groupName="basicFilter" label="Buyer #" visibleInFilterBar="false">
+							<fb:control>
+								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
+									<core:ListItem key="101" text="Supplier A" />
+									<core:ListItem key="102" text="Supplier B" />
+									<core:ListItem key="103" text="Supplier C" />
+									<core:ListItem key="103" text="Supplier D" />
+									<core:ListItem key="103" text="Supplier E" />
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="filterItem10" groupName="basicFilter" label="Article #" visibleInFilterBar="false">
+							<fb:control>
+								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="false">
+									<core:ListItem key="101" text="Supplier A" />
+									<core:ListItem key="102" text="Supplier B" />
+									<core:ListItem key="103" text="Supplier C" />
+									<core:ListItem key="103" text="Supplier D" />
+									<core:ListItem key="103" text="Supplier E" />
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+                        <fb:FilterGroupItem name="dateFilterItem3" groupName="basicFilter" label="Ship Date" visibleInFilterBar="false">
+							<fb:control>
+								<DatePicker value="{path: 'dateModel>/ShipDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
+							</fb:control>
+						</fb:FilterGroupItem>
+                       <fb:FilterGroupItem name="dateFilterItem4" groupName="basicFilter" label="Forcasting Period" visibleInFilterBar="false">
+							<fb:control>
+								<DateRangeSelection displayFormat="dd/MM/yyyy"/>
+							</fb:control>
+						</fb:FilterGroupItem>
+
+						<fb:FilterGroupItem name="filterItem11" groupName="basicFilter" label="Transportation Partner" visibleInFilterBar="false">
+							<fb:control>
+								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
+									<core:ListItem key="101" text="FedEx" />
+									<core:ListItem key="102" text="UPS" />
+									<core:ListItem key="103" text="DHL" />
+									<core:ListItem key="103" text="Canpar Express" />
+									<core:ListItem key="103" text="Purolator" />
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
+
 					</fb:filterGroupItems>
 				</fb:FilterBar>
 			</f:DynamicPageHeader>
