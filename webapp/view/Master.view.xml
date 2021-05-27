@@ -1,5 +1,6 @@
-<mvc:View controllerName="com.sap.sobeys.controller.Master" xmlns="sap.m" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:layout="sap.ui.layout" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:microChart="sap.suite.ui.microchart">
+<mvc:View xmlns="sap.m" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc" xmlns:layout="sap.ui.layout" xmlns:smartTable="sap.ui.comp.smarttable" 
+    xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:microChart="sap.suite.ui.microchart" 
+    controllerName="com.sap.sobeys.controller.Master">
 	<f:DynamicPage id="dynamicPageId" headerExpanded="true" toggleHeaderOnTitleClick="true">
 		<!-- DynamicPage Title -->
 		<f:title>
@@ -43,12 +44,12 @@
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="dateFilterItem1" groupName="basicFilter" label="Order Date" visibleInFilterBar="true">
 							<fb:control>
-								<DatePicker value="{path: 'dateModel>/orderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"></DatePicker>
+								<DatePicker value="{path: 'dateModel>/orderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="dateFilterItem2" groupName="basicFilter" label="Delivery Date" visibleInFilterBar="true">
 							<fb:control>
-								<DatePicker value="{path: 'dateModel>/orderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"></DatePicker>
+								<DatePicker value="{path: 'dateModel>/orderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem3" groupName="basicFilter" label="Status" visibleInFilterBar="true">
@@ -74,43 +75,106 @@
 		<!-- DynamicPage Content -->
 		<f:content>
 			<VBox fitContainer="true">
-				<Table id="contractsTable" inset="false" items="{ path: '/' }" class="sapFDynamicPageAlignContent" width="auto" mode="MultiSelect"
-					alternateRowColors="true" selectionChange=".onSelectionChange">
-					<headerToolbar>
-						<OverflowToolbar>
-							<content>
-								<Title text="Planned Purchase Orders (100)" level="H2"/>
-							</content>
-							<ToolbarSpacer/>
-							<Button id="btnCopy" icon="sap-icon://copy" text="Create Purchase Order" enabled="false" press=".onApproveOrder"/>
-						</OverflowToolbar>
-					</headerToolbar>
-					<columns>
+            	<smartTable:SmartTable id="poTable" entitySet="/"
+		smartFilterId="smartFilterBar" tableType="ResponsiveTable"
+		useExportToExcel="true"  useVariantManagement="false"
+		useTablePersonalisation="true" 
+        header="Proposed Orders" showRowCount="true"
+		persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true"
+        editTogglable="true"
+		demandPopin="true" class="sapUiResponsiveContentPadding" >
+
+				<Table >
+				<columns>
 						<Column>
-							<Text text="Planned Order"/>
+                            <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "Supplier",  "leadingProperty": "Supplier", "sortProperty": "Supplier", "additionalProperty": "Supplier", "description": "Supplier"}' />
+					        </customData>
+							<Text text="Supplier"/>
+						</Column>
+						<Column sortIndicator="None">
+                            <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "SupplyLocation",  "leadingProperty": "SupplyLocation", "sortProperty": "SupplyLocation", "additionalProperty": "SupplyLocation", "description": "SupplyLocation"}' />
+					        </customData>
+							<Text text="Supplying Location"/>
 						</Column>
 						<Column minScreenWidth="Desktop">
+                          <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "ReceivingLocation",  "leadingProperty": "ReceivingLocation", "sortProperty": "ReceivingLocation", "additionalProperty": "ReceivingLocation", "description": "ReceivingLocation"}' />
+					        </customData>
 							<Text text="Receiving Location"/>
 						</Column>
 						<Column minScreenWidth="Desktop">
-							<Text text="Order Date"/>
-						</Column>
-						<Column minScreenWidth="Desktop" hAlign="Center">
-							<Text text="Planned Order Quantity"/>
+                          <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "VSRNumber",  "leadingProperty": "VSRNumber", "sortProperty": "VSRNumber", "additionalProperty": "VSRNumber", "description": "VSRNumber"}' />
+					        </customData>
+							<Text text="VSR #"/>
 						</Column>
 						<Column minScreenWidth="Desktop">
+                          <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "BuyerNumber",  "leadingProperty": "BuyerNumber", "sortProperty": "BuyerNumber", "additionalProperty": "BuyerNumber", "description": "BuyerNumber"}' />
+					        </customData>
+							<Text text="Buyer #"/>
+						</Column>
+                        <Column minScreenWidth="Desktop">
+                          <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "ArticleNumber",  "leadingProperty": "ArticleNumber", "sortProperty": "ArticleNumber", "additionalProperty": "ArticleNumber", "description": "ArticleNumber"}' />
+					        </customData>
+                            <Text text="Article #"></Text>
+                        </Column>
+						<Column minScreenWidth="Desktop" hAlign="Center">
+                          <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "OrdQty",  "leadingProperty": "OrdQty", "sortProperty": "OrdQty", "additionalProperty": "OrdQty", "description": "OrdQty"}' />
+					        </customData>
+							<Text text="Proposed Order Quantity"/>
+						</Column>
+						<Column minScreenWidth="Desktop">
+                         <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "OrderDate",  "leadingProperty": "OrderDate", "sortProperty": "OrderDate", "additionalProperty": "OrderDate", "description": "OrderDate"}' />
+					        </customData>
+							<Text text="Order Date"/>
+						</Column>
+						<Column minScreenWidth="Desktop">
+                         <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "DeliveryDate",  "leadingProperty": "DeliveryDate", "sortProperty": "DeliveryDate", "additionalProperty": "DeliveryDate", "description": "DeliveryDate"}' />
+					        </customData>
 							<Text text="Delivery Date"/>
 						</Column>
 						<Column minScreenWidth="Desktop">
-							<Text text="Available Date"/>
+                         <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "ShipDate",  "leadingProperty": "ShipDate", "sortProperty": "ShipDate", "additionalProperty": "ShipDate", "description": "ShipDate"}' />
+					        </customData>
+							<Text text="Ship Date"/>
 						</Column>
+                        <Column minScreenWidth="Desktop">
+                         <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "TransportationPartner",  "leadingProperty": "TransportationPartner", "sortProperty": "TransportationPartner", "additionalProperty": "TransportationPartner", "description": "TransportationPartner"}' />
+					        </customData>
+                            <Text text="Transportation Partner"></Text>
+                        </Column>                        
 						<Column>
-							<Text text="Supplying Location"/>
-						</Column>
-						<Column>
+                         <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "Status",  "leadingProperty": "Status", "sortProperty": "Status", "additionalProperty": "Status", "description": "Status"}' />
+					        </customData>
 							<Text text="Status"/>
 						</Column>
 						<Column>
+                         <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "Exception",  "leadingProperty": "Exception", "sortProperty": "ExceptionLevel", "additionalProperty": "Exception", "description": "Exception"}' />
+					        </customData>
 							<Text text="Exceptions"/>
 						</Column>
 						<!-- <Column>
@@ -120,24 +184,23 @@
 					<items>
 						<ColumnListItem type="Navigation" press=".onListItemPress">
 							<cells>
-								<ObjectIdentifier title="{id}"/>
-								<ObjectIdentifier title="{receivingLocationId}" text="{receivingLocation}"></ObjectIdentifier>
-								<Text
-									text="{path: 'orderDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSX'}, style: 'medium', UTC: true } }"/>
-								<ObjectNumber
-									number="{ parts:[ {path:'orderQuantity'}, {path: 'units'} ], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false} }"
-									unit="{units}"/>
-								<Text
-									text="{path: 'deliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSX'}, style: 'medium', UTC: true } }"/>
-								<Text
-									text="{path: 'availabilityDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSX'}, style: 'medium', UTC: true } }"/>
-								<Text text="{supplyingLocation}"/>
-								<ObjectStatus text="{status}" state="{path: 'status' , formatter: '.formatter.statusText' }"/>
-								<microChart:StackedBarMicroChart size="Responsive" press="press">
+								<ObjectIdentifier title="{SupplierName}" text="{Supplier}"/>
+								<Text text="{SupplyLocation}"/>
+								<ObjectIdentifier title="{ReceivingLocation}"/>
+                                <ObjectIdentifier title="{VSRNumber}"></ObjectIdentifier>
+                                <ObjectIdentifier title="{BuyerNumber}"></ObjectIdentifier>
+                                <ObjectIdentifier title="{ArticleNumber}"></ObjectIdentifier>
+								<ObjectNumber number="{ parts:[ {path:'OrdQty'}, {path: 'RetailUnits'} ], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false} }" unit="{RetailUnits}"/>
+								<Text text="{path: 'OrderDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
+								<Text text="{path: 'DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
+								<Text text="{path: 'ShipDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
+	                            <ObjectIdentifier title="{TransportationPartner}"></ObjectIdentifier>
+								<ObjectStatus text="{Status}" state="{path: 'Status' , formatter: '.formatter.statusText' }"/>
+	 							<microChart:StackedBarMicroChart size="Responsive" press="press">
 									<microChart:bars>
-										<microChart:StackedBarMicroChartBar value="{success}" valueColor="green"/>
-										<microChart:StackedBarMicroChartBar value="{warning}" valueColor="orange"/>
-										<microChart:StackedBarMicroChartBar value="{error}" valueColor="red"/>
+										<microChart:StackedBarMicroChartBar value="{path:'ExceptionLevel',formatter: '.formatter.calcValid'}" valueColor="green"/>
+										<microChart:StackedBarMicroChartBar value="0" valueColor="orange"/>
+										<microChart:StackedBarMicroChartBar value="{path:'ExceptionLevel',formatter: '.formatter.calcInvalid'}" valueColor="red"/>
 									</microChart:bars>
 								</microChart:StackedBarMicroChart>
 								<!-- <Button text="Approve" enabled="{path:'status' , formatter: '.formatter.actionEnabled' }" press=".onApproveContractPress"></Button> -->
@@ -145,6 +208,7 @@
 						</ColumnListItem>
 					</items>
 				</Table>
+                </smartTable:SmartTable>
 			</VBox>
 		</f:content>
 		<!-- DynamicPage Footer -->

@@ -4,14 +4,23 @@ sap.ui.define([], function () {
 		// Master Page - show the status of the contract in semantic fashion
 		statusText: function (sStatus) {
 			switch (sStatus) {
-			case "Created Automatically":
+			case "Ready":
 				return "None";
-			case "Pending Review":
-				return "Warning";
+			case "Urgent Review":
+				return "Error";
 			default:
 				return "Warning";
 			}
-		},
+        },
+        
+        // Master page - calculate valid
+        calcValid: function (exLevel) {
+            return exLevel/100;
+        },
+
+        calcInvalid: function (exLevel){
+            return 100-(exLevel/100);
+        },
 
 		// Master page - Depending on status, show the Approved button
 		// Approved button needs to be enabled only for Pending and Returned
