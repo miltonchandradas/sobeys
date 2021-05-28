@@ -1,5 +1,6 @@
 <mvc:View xmlns="sap.m" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc" xmlns:layout="sap.ui.layout" xmlns:smartTable="sap.ui.comp.smarttable" 
     xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:microChart="sap.suite.ui.microchart" 
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     controllerName="com.sap.sobeys.controller.Master">
 	<f:DynamicPage id="dynamicPageId" headerExpanded="true" toggleHeaderOnTitleClick="true">
 		<!-- DynamicPage Title -->
@@ -160,6 +161,14 @@
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="filterItem12" groupName="basicFilter" label="Vendor Lead Time" visibleInFilterBar="false">
+							<fb:control>
+	                        	<Input
+			                        id="inputNumber"
+		                        	type="Number"
+		                        	class="sapUiSmallMarginBottom" />
+							</fb:control>
+						</fb:FilterGroupItem>
 
 					</fb:filterGroupItems>
 				</fb:FilterBar>
@@ -168,17 +177,34 @@
 		<!-- DynamicPage Content -->
 		<f:content>
 			<VBox fitContainer="true">
-            	<smartTable:SmartTable id="poTable" entitySet="/"
-		smartFilterId="smartFilterBar" tableType="ResponsiveTable"
-		useExportToExcel="true"  useVariantManagement="false"
-		useTablePersonalisation="true" 
-        header="Proposed Orders" showRowCount="true"
-		persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true"
-        editTogglable="true"
-		demandPopin="true" class="sapUiResponsiveContentPadding" >
-
-				<Table >
+            	<smartTable:SmartTable id="poTable" entitySet="/"  smartFilterId="smartFilterBar" tableType="ResponsiveTable"
+		                                            useExportToExcel="true"  useVariantManagement="false"
+		                                            useTablePersonalisation="true" header="Proposed Orders" showRowCount="true"
+		                                            persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true"
+                                                    editTogglable="false"  app:useSmartToggle="true" demandPopin="true"
+		                                            class="sapUiResponsiveContentPadding" >
+		<smartTable:customToolbar>
+			<OverflowToolbar design="Transparent">
+				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://sales-order" tooltip="Create PO" text="Create PO" press="onApproveOrder"/>
+			</OverflowToolbar>
+		</smartTable:customToolbar>
+				<Table sticky="ColumnHeaders,HeaderToolbar" >
 				<columns>
+						<Column>
+                           <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "Check"}' />
+					        </customData>
+							<Text text=""/>
+						</Column>
+    					<Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "Department",  "leadingProperty": "Department", "sortProperty": "Department", "additionalProperty": "Department", "description": "Department"}' />
+					        </customData>
+							<Text text="Department"/>
+						</Column>
 						<Column>
                             <customData>
 						        <core:CustomData key="p13nData"
@@ -198,7 +224,7 @@
 						        <core:CustomData key="p13nData"
 										 value='\{"columnKey": "ReceivingLocation",  "leadingProperty": "ReceivingLocation", "sortProperty": "ReceivingLocation", "additionalProperty": "ReceivingLocation", "description": "ReceivingLocation"}' />
 					        </customData>
-							<Text text="Receiving Location"/>
+							<Text text="CFC Name"/>
 						</Column>
 						<Column minScreenWidth="Desktop">
                           <customData>
@@ -221,12 +247,27 @@
 					        </customData>
                             <Text text="Article #"></Text>
                         </Column>
+    					<Column minScreenWidth="Desktop" hAlign="Center">
+                          <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "Item",  "leadingProperty": "Item", "sortProperty": "Item", "additionalProperty": "Item", "description": "Item"}' />
+					        </customData>
+							<Text text="Item"/>
+						</Column>
+	                    
 						<Column minScreenWidth="Desktop" hAlign="Center">
                           <customData>
 						        <core:CustomData key="p13nData"
 										 value='\{"columnKey": "OrdQty",  "leadingProperty": "OrdQty", "sortProperty": "OrdQty", "additionalProperty": "OrdQty", "description": "OrdQty"}' />
 					        </customData>
 							<Text text="Proposed Order Quantity"/>
+						</Column>
+						<Column minScreenWidth="Desktop" hAlign="Center">
+                          <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "CaseQty",  "leadingProperty": "CaseQty", "sortProperty": "CaseQty", "additionalProperty": "CaseQty", "description": "CaseQty"}' />
+					        </customData>
+							<Text text="Proposed Case Quantity"/>
 						</Column>
 						<Column minScreenWidth="Desktop">
                          <customData>
@@ -270,6 +311,28 @@
 					        </customData>
 							<Text text="Exceptions"/>
 						</Column>
+                        <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "TempZone",  "leadingProperty": "TempZone", "sortProperty": "TempZone", "additionalProperty": "TempZone", "description": "TempZone"}' />
+					        </customData>
+							<Text text="Temp Zone"/>
+						</Column>
+    					<Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "OrderReach",  "leadingProperty": "OrderReach", "sortProperty": "OrderReach", "additionalProperty": "OrderReach", "description": "OrderReach"}' />
+					        </customData>
+							<Text text="Order Reach"/>
+						</Column>
+    					<Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "VendorLeadTime",  "leadingProperty": "VendorLeadTime", "sortProperty": "VendorLeadTime", "additionalProperty": "VendorLeadTime", "description": "VendorLeadTime"}' />
+					        </customData>
+							<Text text="Vendor Lead Time"/>
+						</Column>
+
 						<!-- <Column>
 							<Text text="Actions"/>
 						</Column> -->
@@ -277,16 +340,32 @@
 					<items>
 						<ColumnListItem type="Navigation" press=".onListItemPress">
 							<cells>
+                                <CheckBox ></CheckBox>
+                                <ObjectIdentifier title="{Department}"></ObjectIdentifier>
 								<ObjectIdentifier title="{SupplierName}" text="{Supplier}"/>
 								<Text text="{SupplyLocation}"/>
 								<ObjectIdentifier title="{ReceivingLocation}"/>
                                 <ObjectIdentifier title="{VSRNumber}"></ObjectIdentifier>
                                 <ObjectIdentifier title="{BuyerNumber}"></ObjectIdentifier>
                                 <ObjectIdentifier title="{ArticleNumber}"></ObjectIdentifier>
-								<ObjectNumber number="{ parts:[ {path:'OrdQty'}, {path: 'RetailUnits'} ], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false} }" unit="{RetailUnits}"/>
-								<Text text="{path: 'OrderDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
-								<Text text="{path: 'DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
-								<Text text="{path: 'ShipDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
+								<ObjectIdentifier title="{ItemDescription}" text="{Item}"/>
+								<ObjectNumber number="{ parts:[ {path:'OrdQty'}, {path: 'RetailUnits'} ], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false} }" />
+								<Input
+			                        id="caseNumber"
+                                    value="{CaseQty}"
+		                        	type="Number"
+		                        	class="sapUiSmallMarginBottom" />
+
+                                <Text text="{path: 'OrderDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
+								<DatePicker
+			                        id="DP5"
+			                        value="{DeliveryDate}"
+			                        valueFormat="MM/dd/yyyy"
+			                        displayFormat="medium"
+	                    			change="handleChange"
+		                            	class="sapUiSmallMarginBottom"/>
+
+                                <Text text="{path: 'ShipDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
 	                            <ObjectIdentifier title="{TransportationPartner}"></ObjectIdentifier>
 								<ObjectStatus text="{Status}" state="{path: 'Status' , formatter: '.formatter.statusText' }"/>
 	 							<microChart:StackedBarMicroChart size="Responsive" press="press">
@@ -296,6 +375,9 @@
 										<microChart:StackedBarMicroChartBar value="{path:'ExceptionLevel',formatter: '.formatter.calcInvalid'}" valueColor="red"/>
 									</microChart:bars>
 								</microChart:StackedBarMicroChart>
+	                            <ObjectIdentifier title="{TempZone}"></ObjectIdentifier>
+                                <Text text="{path: 'OrderReach', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
+	                            <ObjectIdentifier title="{VendorLeadTime}"></ObjectIdentifier>
 								<!-- <Button text="Approve" enabled="{path:'status' , formatter: '.formatter.actionEnabled' }" press=".onApproveContractPress"></Button> -->
 							</cells>
 						</ColumnListItem>
