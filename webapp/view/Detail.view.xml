@@ -1,236 +1,255 @@
 <mvc:View controllerName="com.sap.sobeys.controller.Detail" xmlns:uxap="sap.uxap" xmlns="sap.m" xmlns:f="sap.f"
-	xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
-	<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false"
-		preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false" useIconTabBar="false" showFooter="true">
-		<uxap:headerTitle>
-			<uxap:ObjectPageDynamicHeaderTitle>
-				<uxap:expandedHeading>
-					<Title text="{contractModel>vendor}" wrapping="true" class="sapUiSmallMarginEnd"/>
-				</uxap:expandedHeading>
-				<uxap:snappedHeading>
-					<FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
-						<FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
-							<Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="S" displayShape="Square"
-								class="sapUiTinyMarginEnd"/>
-							<Title text="{contractModel>vendor}" wrapping="true"/>
-						</FlexBox>
-					</FlexBox>
-				</uxap:snappedHeading>
-				<uxap:navigationActions>
-					<OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press=".onHandleFullScreen" tooltip="Enter Full Screen Mode"
-						visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
-					<OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press=".onHandleExitFullScreen" tooltip="Exit Full Screen Mode"
-						visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
-					<OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press=".onHandleClose" tooltip="Close column"
-						visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
-				</uxap:navigationActions>
-			</uxap:ObjectPageDynamicHeaderTitle>
-		</uxap:headerTitle>
-		<uxap:headerContent>
-			<FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
-				<Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="L" displayShape="Square"
-					imageFitType="Contain" class="sapUiTinyMarginEnd"></Avatar>
-				<VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-					<Label text="Vendor Name"/>
-					<Text text="{contractModel>vendor}"/>
-				</VBox>
-				<VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-					<Label text="Department"/>
-					<Text text="{contractModel>department}"/>
-				</VBox>
-				<VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-					<Label text="Net Amount"/>
-					<ObjectNumber number="{contractModel>CurrencyCode} {contractModel>NetAmount}" emphasized="false"/>
-				</VBox>
-			</FlexBox>
-		</uxap:headerContent>
-		<uxap:sections>
-			<uxap:ObjectPageSection id="generalSection" title="General Information">
-				<uxap:subSections>
-					<uxap:ObjectPageSubSection>
-						<VBox class="sapUiSmallMargin" id="vboxContractDetailsForm">
-							<form:SimpleForm id="formContractDetails" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="6" labelSpanM="6" labelSpanS="12"
-								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
-								singleContainerFullSize="false" validateFieldGroup=".onValidateDetailsData">
-								<form:content>
-									<core:Title text="General Info"/>
-									<Label text="Supplying Location"/>
-									<Text text="{contractModel>vendor}"></Text>
-									<Label text="Purchase Order Item"/>
-									<Text text="Ice cream"></Text>
-									<Label text="Changed By"/>
-									<Text text="CIMC2"></Text>
-									<Label text="Changed Reason"/>
-									<Text text="Minimum threshold"></Text>
-									<!--<Input fieldGroupIds="detailsData"/>-->
-									<core:Title text="Date Info"/>
-									<Label text="Created On"/>
-									<Text text="Mar 3, 2021"></Text>
-									<Label text="Changed On"/>
-									<Text text="Mar 3, 2021"></Text>
-									<Label text="Availability Date"/>
-									<Text text="Mar 3, 2021"></Text>
-									<core:Title text="Order History"/>
-									<Label text="25th Percentile of Order History"/>
-									<Text text="6 BOXES"></Text>
-									<Label text="75th Percentile of Order History"/>
-									<Text text="20 BOXES"></Text>
-									<Label text="90th Percentile of Order History"/>
-									<Text text="22 BOXES"></Text>
-								</form:content>
-							</form:SimpleForm>
-						</VBox>
-					</uxap:ObjectPageSubSection>
-				</uxap:subSections>
-			</uxap:ObjectPageSection>
-			<uxap:ObjectPageSection id="itemsSection" title="Products">
-				<uxap:subSections>
-					<uxap:ObjectPageSubSection>
-						<uxap:blocks>
-							<VBox fitContainer="true">
-								<Table id="itemsTable" inset="false" items="{itemModel>/}" class="sapFDynamicPageAlignContent" width="auto" alternateRowColors="true">
-									<headerToolbar>
-										<OverflowToolbar>
-											<content>
-												<Title text="Products (10)" level="H2"/>
-											</content>
+    xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+    <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false" useIconTabBar="false" showFooter="true">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:expandedHeading>
+                    <Title text="{contractModel>vendor}" wrapping="true" class="sapUiSmallMarginEnd"/>
+                </uxap:expandedHeading>
+                <uxap:snappedHeading>
+                    <FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+                        <FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+                            <Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="S" displayShape="Square"
+                                class="sapUiTinyMarginEnd"/>
+                            <Title text="{contractModel>vendor}" wrapping="true"/>
+                        </FlexBox>
+                    </FlexBox>
+                </uxap:snappedHeading>
+                <uxap:navigationActions>
+                    <OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press=".onHandleFullScreen" tooltip="Enter Full Screen Mode"
+                        visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+                    <OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press=".onHandleExitFullScreen" tooltip="Exit Full Screen Mode"
+                        visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+                    <OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press=".onHandleClose" tooltip="Close column"
+                        visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+                </uxap:navigationActions>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+        <uxap:headerContent>
+            <FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+                <Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="L" displayShape="Square"
+                    imageFitType="Contain" class="sapUiTinyMarginEnd"></Avatar>
+                <VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+                    <Label text="Vendor Name"/>
+                    <Text text="{contractModel>vendor}"/>
+                </VBox>
+                <VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+                    <Label text="Department"/>
+                    <Text text="{contractModel>department}"/>
+                </VBox>
+               
+            </FlexBox>
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection id="generalSection" title="General Information">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox class="sapUiSmallMargin" id="vboxContractDetailsForm">
+                            <form:SimpleForm id="formContractDetails" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="6" labelSpanM="6" labelSpanS="12"
+                                adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+                                singleContainerFullSize="false" validateFieldGroup=".onValidateDetailsData" editable="true">
+                                <form:content>
+                                    <core:Title text="General Info"/>
+                                    <Label text="Transportation Partner" ></Label>
+                                    <Text text="UPS" ></Text>
+                                    <Label text="VSR # " ></Label>
+                                    <Text text="9894536" ></Text>
+                                    <Label text="Total Weight" ></Label>
+                                    <Text text="100 LB" ></Text>
+                                    <Label text="Transportation" ></Label>
+                                    <Text text="Air" ></Text>
+                                    <Label text="Supplying Location"/>
+                                    <Text text="{contractModel>vendor}"></Text>
+                                    <Label text="Receiving Location"/>
+                                    <Text text="Warehouse A"></Text>
+                                    <Label text="Purchase Order Item"/>
+                                    <Text text="Ice cream"></Text>
+                                    <Label text="Changed By"/>
+                                    <Text text="CIMC2"></Text>
+                                    <Label text="Changed Reason"/>
+                                    <Text text="Minimum threshold"></Text>
+                                    <Label text="Total cost of PO" ></Label>
+                                    <Text text="689.12 CAD" ></Text>
+                                    <!--<Input fieldGroupIds="detailsData"/>-->
+                                    <core:Title text="Date Info"/>
+                                    <Label text="Created On"/>
+                                    <Text text="Mar 3, 2021"></Text>
+                                    <Label text="Changed On"/>
+                                    <Text text="Mar 3, 2021"></Text>
+                                    <Label text="Delivery Date"/>
+                                    <Text text="Mar 3, 2021"></Text>
+                                    <Label text="Order Date"/>
+                                    <Text text="Feb 4, 2021"></Text>
+                                    <core:Title text="Order History"/>
+                                    <Label text="Mar 3, 2021"/>
+                                    <Text text="6 BOXES"></Text>
+                                    <Label text="April 21, 2021"/>
+                                    <Text text="20 BOXES"></Text>
+                                    <Label text="May 4, 2021"/>
+                                    <Text text="22 BOXES"></Text>
+                                </form:content>
+                            </form:SimpleForm>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection id="itemsSection" title="Products">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <VBox fitContainer="true">
+                                <Table id="itemsTable" inset="false" items="{itemModel>/}" class="sapFDynamicPageAlignContent" width="auto" alternateRowColors="true">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <content>
+                                                <Title text="Products (10)" level="H2"/>
+                                            </content>
                                             <ToolbarSpacer/>
                                             <Switch  state="{viewModel>/canEdit}" customTextOn="Edit" customTextOff="Edit">
                                             
-								<layoutData>
-									<FlexItemData growFactor="1"/>
-								</layoutData>
-							</Switch>
+                                <layoutData>
+                                    <FlexItemData growFactor="1"/>
+                                </layoutData>
+                            </Switch>
                             <Button icon="sap-icon://save" text="Save" press=".onSave"></Button>
-										</OverflowToolbar>
-									</headerToolbar>
-									<columns>
-										<Column width="20%">
-											<Text text="Item"/>
-										</Column>
-										<Column minScreenWidth="Desktop">
-											<Text text="Size"/>
-										</Column>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column width="20%">
+                                            <Text text="Item"/>
+                                        </Column>
                                         <Column minScreenWidth="Desktop">
-											<Text text="Planned Quantity"/>
-										</Column>
-										<Column hAlign="Right">
-											<Text text="List Price"/>
-										</Column>
-										<Column hAlign="Right">
-											<Text text="Discount Amount"/>
-										</Column>
-										<Column>
-											<Text text="Discount Type"/>
-										</Column>
-										<Column hAlign="Right">
-											<Text text="Net Amount"/>
-										</Column>
-									</columns>
-									<items>
-										<ColumnListItem highlight="{itemModel>highlight}">
-											<cells>
-												<ObjectIdentifier title="{itemModel>description}" text="{itemModel>id}"/>
-												<Text text="{itemModel>size}"/>
+                                            <Text text="Size"/>
+                                        </Column>
+                                        <Column minScreenWidth="Desktop">
+                                            <Text text="Planned Quantity"/>
+                                        </Column>
+                                        <Column hAlign="Right">
+                                            <Text text="List Price"/>
+                                        </Column>
+                                        <Column hAlign="Right">
+                                            <Text text="Discount Amount"/>
+                                        </Column>
+                                        <Column>
+                                            <Text text="Discount Type"/>
+                                        </Column>
+                                        <Column hAlign="Right">
+                                            <Text text="Net Amount"/>
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem highlight="{itemModel>highlight}">
+                                            <cells>
+                                                <ObjectIdentifier title="{itemModel>description}" text="{itemModel>id}"/>
+                                                <Text text="{itemModel>size}"/>
                                                 <Input  value="{itemModel>quantity}" enabled="{viewModel>/canEdit}" valueState="{itemModel>highlight}" change=".onQuantityChange"></Input>
-												<ObjectNumber
-													number="{ parts:[ {path:'itemModel>listprice'}, {path:'itemModel>currencycode'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-													unit="{itemModel>currencycode}"/>
-												<Text text="{itemModel>dealamount}"/>
-												<Text text="{itemModel>discounttype}"/>
-												<ObjectNumber
-													number="{ parts:[ {path:'contractModel>NetAmount'}, {path:'itemModel>currencycode'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-													unit="{itemModel>currencycode}"/>
-											</cells>
-										</ColumnListItem>
-									</items>
-								</Table>
-							</VBox>
-						</uxap:blocks>
-					</uxap:ObjectPageSubSection>
-				</uxap:subSections>
-			</uxap:ObjectPageSection>
-			<uxap:ObjectPageSection id="exceptionsSection" title="Exceptions">
-				<uxap:subSections>
-					<uxap:ObjectPageSubSection>
-						<uxap:blocks>
-							<VBox fitContainer="true">
-								<Table inset="false" items="{exceptionsModel>/}" class="sapFDynamicPageAlignContent" width="auto" alternateRowColors="true">
-									<headerToolbar>
-										<OverflowToolbar>
-											<content>
-												<Title text="Exceptions (1)" level="H2"/>
-											</content>
-										</OverflowToolbar>
-									</headerToolbar>
-									<columns>
-										<Column width="20%">
-											<Text text="Message Type"/>
-										</Column>
-										<Column minScreenWidth="Desktop">
-											<Text text="Application Area"/>
-										</Column>
-										<Column hAlign="Right">
-											<Text text="Message"/>
-										</Column>
-										<Column hAlign="Right">
-											<Text text="Exception Status"/>
-										</Column>
-										<Column>
-											<Text text="Message Text"/>
-										</Column>
-										<Column hAlign="Right">
-											<Text text="Expires on"/>
-										</Column>
-									</columns>
-									<items>
-										<ColumnListItem>
-											<cells>
-												<ObjectIdentifier title="{exceptionsModel>type}"/>
-												<Text text="{exceptionsModel>area}"/>
-												<Text text="{exceptionsModel>message}"/>
-												<Text text="{exceptionsModel>status}"/>
-												<Text text="{exceptionsModel>text}"/>
-												<Text text="{exceptionsModel>expiresOn}"/>
-											</cells>
-										</ColumnListItem>
-									</items>
-								</Table>
-							</VBox>
-						</uxap:blocks>
-					</uxap:ObjectPageSubSection>
-				</uxap:subSections>
-			</uxap:ObjectPageSection>
-			<uxap:ObjectPageSection id="calculationSection" title="Calculation Basis">
-				<uxap:subSections>
-					<uxap:ObjectPageSubSection>
-						<VBox class="sapUiSmallMargin" id="vboxContractDetailsForm2">
-							<form:SimpleForm id="formContractDetails2" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="6" labelSpanM="6" labelSpanS="12"
-								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
-								singleContainerFullSize="false" validateFieldGroup=".onValidateDetailsData">
-								<form:content>
-									<core:Title text="Stock Info"/>
-									<Label text="Stock"/>
-									<Text text="10 PC"></Text>
-									<!--<Input fieldGroupIds="detailsData"/>-->
-									<core:Title text="Cost Info"/>
-									<Label text="Sales Price"/>
-									<Text text="20 USD"></Text>
-								</form:content>
-							</form:SimpleForm>
-						</VBox>
-					</uxap:ObjectPageSubSection>
-				</uxap:subSections>
-			</uxap:ObjectPageSection>
-		</uxap:sections>
-	<uxap:footer>
-			<OverflowToolbar>
-				<ToolbarSpacer/>
-				<Button type="Accept" text="Approve"
-					 press=".onApprove"/>
-				<Button type="Reject" text="Cancel" press=".onCancel"/>
-			</OverflowToolbar>
-		</uxap:footer>
-	</uxap:ObjectPageLayout>
+                                                <ObjectNumber
+                                                    number="{ parts:[ {path:'itemModel>listprice'}, {path:'itemModel>currencycode'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+                                                   unit="{itemModel>currencycode}"/>
+                                                <Text text="{itemModel>dealamount}"/>
+                                                <Text text="{itemModel>discounttype}"/>
+                                                <ObjectNumber
+                                                    number="{ parts:[ {path:'contractModel>NetAmount'}, {path:'itemModel>currencycode'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+                                                    unit="{itemModel>currencycode}"/>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection id="exceptionsSection" title="Exceptions">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <VBox fitContainer="true">
+                                <Table inset="false" items="{exceptionsModel>/}" class="sapFDynamicPageAlignContent" width="auto" alternateRowColors="true">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <content>
+                                                <Title text="Exceptions (1)" level="H2"/>
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column width="20%">
+                                            <Text text="Message Type"/>
+                                        </Column>
+                                        <Column minScreenWidth="Desktop">
+                                            <Text text="Application Area"/>
+                                        </Column>
+                                        <Column hAlign="Right">
+                                            <Text text="Message"/>
+                                        </Column>
+                                        <Column hAlign="Right">
+                                            <Text text="Exception Status"/>
+                                        </Column>
+                                        <Column>
+                                            <Text text="Message Text"/>
+                                        </Column>
+                                        <Column hAlign="Right">
+                                            <Text text="Expires on"/>
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <ObjectIdentifier title="{exceptionsModel>type}"/>
+                                                <Text text="{exceptionsModel>area}"/>
+                                                <Text text="{exceptionsModel>message}"/>
+                                                <Text text="{exceptionsModel>status}"/>
+                                                <Text text="{exceptionsModel>text}"/>
+                                                <Text text="{exceptionsModel>expiresOn}"/>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection id="calculationSection" title="Calculation Basis">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox class="sapUiSmallMargin" id="vboxContractDetailsForm2">
+                            <form:SimpleForm id="formContractDetails2" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="6" labelSpanM="6" labelSpanS="12"
+                                adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+                                singleContainerFullSize="false" validateFieldGroup=".onValidateDetailsData">
+                                <form:content>
+                                    <core:Title text="Stock Info"/>
+                                    <Label text="Current Stock"/>
+                                    <Text text="10"></Text>
+                                    <Label text="Cases Proposed"/>
+                                    <Input value="50" type="Number" ></Input>
+                                    <Label text="Articles Proposed"/>
+                                    <Text text="850" ></Text>
+                                    <Label text="Total Weight"/>
+                                    <Text text="100 LB" ></Text>
+                                    <!--<Input fieldGroupIds="detailsData"/>-->
+                                    <core:Title text="Cost Info"/>
+                                    <Label text="Sales Price"/>
+                                    <Text text="20 CAD"></Text>
+                                    <Label text="Net Amount"/>
+                                    <Text text="{contractModel>NetAmount} CAD"/>
+                             </form:content>
+                            </form:SimpleForm>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    <uxap:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button type="Accept" text="Approve"
+                     press=".onApprove"/>
+                <Button type="Reject" text="Cancel" press=".onCancel"/>
+            </OverflowToolbar>
+        </uxap:footer>
+    </uxap:ObjectPageLayout>
     
 </mvc:View>
