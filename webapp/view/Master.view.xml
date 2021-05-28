@@ -332,7 +332,21 @@
 					        </customData>
 							<Text text="Vendor Lead Time"/>
 						</Column>
-
+   				     	<Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "PONumber",  "leadingProperty": "PONumber", "sortProperty": "PONumber", "additionalProperty": "PONumber", "description": "PONumber"}' />
+					        </customData>
+							<Text text="PO Number"/>
+						</Column>
+   					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData"
+										 value='\{"columnKey": "LastChanged",  "leadingProperty": "LastChanged", "sortProperty": "LastChanged", "additionalProperty": "LastChanged", "description": "LastChanged"}' />
+					        </customData>
+							<Text text="Last Changed"/>
+						</Column>
+   	
 						<!-- <Column>
 							<Text text="Actions"/>
 						</Column> -->
@@ -378,6 +392,8 @@
 	                            <ObjectIdentifier title="{TempZone}"></ObjectIdentifier>
                                 <Text text="{path: 'OrderReach', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
 	                            <ObjectIdentifier title="{VendorLeadTime}"></ObjectIdentifier>
+	                           <ObjectIdentifier title="{PONumber}"></ObjectIdentifier>
+	                           <ObjectIdentifier title="{path: 'LastChanged', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }" text="{ChangedBy}"></ObjectIdentifier>
 								<!-- <Button text="Approve" enabled="{path:'status' , formatter: '.formatter.actionEnabled' }" press=".onApproveContractPress"></Button> -->
 							</cells>
 						</ColumnListItem>
