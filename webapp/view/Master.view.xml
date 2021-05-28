@@ -1,5 +1,5 @@
 <mvc:View xmlns="sap.m" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc" xmlns:layout="sap.ui.layout" xmlns:smartTable="sap.ui.comp.smarttable" 
-    xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:microChart="sap.suite.ui.microchart" 
+    xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:microChart="sap.suite.ui.microchart"   xmlns:v="sap.ui.comp.variants"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     controllerName="com.sap.sobeys.controller.Master">
 	<f:DynamicPage id="dynamicPageId" headerExpanded="true" toggleHeaderOnTitleClick="true">
@@ -17,7 +17,13 @@
 		<!-- DynamicPage Header -->
 		<f:header>
 			<f:DynamicPageHeader pinnable="true">
-				<fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="true">
+	         <v:VariantManagement id="vm" select="onSelect" save="onSave" enabled="true" manage="onManage"
+                         showExecuteOnSelection="true" showShare="false" variantItems="{/VariantSet}">
+                <v:variantItems>
+                    <v:VariantItem text="{VAR_NAME}" key="{VAR_KEY}"> </v:VariantItem>
+            </v:variantItems>                             
+         </v:VariantManagement>
+ 			<fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="true">
 					<fb:filterGroupItems>
 						<fb:FilterGroupItem name="A" groupName="A" label="Department" visibleInFilterBar="true">
 							<fb:control>
@@ -176,8 +182,9 @@
 		</f:header>
 		<!-- DynamicPage Content -->
 		<f:content>
+ 
 			<VBox fitContainer="true">
-            	<smartTable:SmartTable id="poTable" entitySet="/"  smartFilterId="smartFilterBar" tableType="ResponsiveTable"
+          	<smartTable:SmartTable id="poTable" entitySet="/"  smartFilterId="smartFilterBar" tableType="ResponsiveTable"
 		                                            useExportToExcel="true"  useVariantManagement="false"
 		                                            useTablePersonalisation="true" header="Proposed Orders" showRowCount="true"
 		                                            persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true"
