@@ -16,7 +16,8 @@
         "currencycode": "CAD",
         "recost": true,
         "quantity": 98,
-        "highlight": "None"
+        "highlight": "None",
+        "sku": 4567
     },
     {
         "id": 10100002,
@@ -35,7 +36,8 @@
         "currencycode": "CAD",
         "recost": true,
         "quantity": 98,
-        "highlight": "None"
+        "highlight": "None",
+        "sku": 3768
     },
     {
         "id": 10100003,
@@ -54,7 +56,8 @@
         "currencycode": "CAD",
         "recost": true,
         "quantity": 98,
-        "highlight": "None"
+        "highlight": "None",
+        "sku": 3764
     },
     {
         "id": 10100004,
@@ -73,7 +76,8 @@
         "currencycode": "CAD",
         "recost": true,
         "quantity": 98,
-        "highlight": "None"
+        "highlight": "None",
+        "sku": 4567
     },
     {
         "id": 10100005,
@@ -92,7 +96,8 @@
         "currencycode": "CAD",
         "recost": true,
         "quantity": 98,
-        "highlight": "None"
+        "highlight": "None",
+        "sku": 3984
     },
     {
         "id": 10100006,
@@ -111,7 +116,8 @@
         "currencycode": "CAD",
         "recost": true,
         "quantity": 98,
-        "highlight": "None"
+        "highlight": "None",
+        "sku": 8374
     },
     {
         "id": 10100007,
@@ -130,7 +136,8 @@
         "currencycode": "CAD",
         "recost": true,
         "quantity": 98,
-        "highlight": "None"
+        "highlight": "None",
+        "sku": 2674
     },
     {
         "id": 10100008,
@@ -149,7 +156,8 @@
         "currencycode": "CAD",
         "recost": true,
         "quantity": 98,
-        "highlight": "None"
+        "highlight": "None",
+        "sku": 3874
     },
     {
         "id": 10100009,
@@ -168,7 +176,8 @@
         "currencycode": "CAD",
         "recost": true,
         "quantity": 98,
-        "highlight": "None"
+        "highlight": "None",
+        "sku": 9384
     },
     {
         "id": 10100010,
@@ -187,6 +196,7 @@
         "currencycode": "CAD",
         "recost": true,
         "quantity": 98,
-        "highlight":"None"
+        "highlight":"None",
+        "sku": 1890
     }
 ]

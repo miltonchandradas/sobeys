@@ -10,7 +10,7 @@
                 <uxap:snappedHeading>
                     <FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
                         <FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
-                            <Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="S" displayShape="Square"
+                            <f:Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="S" displayShape="Square"
                                 class="sapUiTinyMarginEnd"/>
                             <Title text="{contractModel>vendor}" wrapping="true"/>
                         </FlexBox>
@@ -28,8 +28,8 @@
         </uxap:headerTitle>
         <uxap:headerContent>
             <FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
-                <Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="L" displayShape="Square"
-                    imageFitType="Contain" class="sapUiTinyMarginEnd"></Avatar>
+                <f:Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="L" displayShape="Square"
+                    imageFitType="Contain" class="sapUiTinyMarginEnd"/>
                 <VBox justifyContent="Center" class="sapUiSmallMarginEnd">
                     <Label text="Vendor Name"/>
                     <Text text="{contractModel>vendor}"/>
@@ -59,7 +59,7 @@
                                     <Text text="100 LB" ></Text>
                                     <Label text="Transportation" ></Label>
                                     <Text text="Air" ></Text>
-                                    <Label text="Supplying Location"/>
+                                   <Label text="Supplying Location"/>
                                     <Text text="{contractModel>vendor}"></Text>
                                     <Label text="Receiving Location"/>
                                     <Text text="Warehouse A"></Text>
@@ -115,7 +115,7 @@
                             <Button icon="sap-icon://save" text="Save" press=".onSave"></Button>
                                         </OverflowToolbar>
                                     </headerToolbar>
-                                    <columns>
+<columns>
                                         <Column width="20%">
                                             <Text text="Item"/>
                                         </Column>
@@ -134,9 +134,37 @@
                                         <Column>
                                             <Text text="Discount Type"/>
                                         </Column>
-                                        <Column hAlign="Right">
+                                        <Column hAlign="Center">
                                             <Text text="Net Amount"/>
                                         </Column>
+                                        <Column >
+                                            <Text text="Article #"/>
+                                        </Column>
+                                        <Column >
+                                            <Text text="SKUID#"/>
+                                        </Column>
+                                        <!-- <Column hAlign="Center" >
+                                            <Text  text="Description"/>
+                                        </Column> -->
+                                        <Column hAlign="Center">
+                                            <Text text="Buying UOM"/>
+                                        </Column>
+                                        <Column hAlign="Center">
+                                            <Text text="Pack Size"/>
+                                        </Column>
+                                        <Column hAlign="Center">
+                                            <Text text="TI"/>
+                                        </Column>
+                                        <Column hAlign="Center">
+                                            <Text text="HI"/>
+                                        </Column>
+                                        <Column hAlign="Right">
+                                            <Text text="Weight"/>
+                                        </Column>
+                                        <Column hAlign="Right">
+                                            <Text text="Price"/>
+                                        </Column>
+                                        
                                     </columns>
                                     <items>
                                         <ColumnListItem highlight="{itemModel>highlight}">
@@ -146,12 +174,21 @@
                                                 <Input  value="{itemModel>quantity}" enabled="{viewModel>/canEdit}" valueState="{itemModel>highlight}" change=".onQuantityChange"></Input>
                                                 <ObjectNumber
                                                     number="{ parts:[ {path:'itemModel>listprice'}, {path:'itemModel>currencycode'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-                                                   unit="{itemModel>currencycode}"/>
+                                                    unit="{itemModel>currencycode}"/>
                                                 <Text text="{itemModel>dealamount}"/>
                                                 <Text text="{itemModel>discounttype}"/>
                                                 <ObjectNumber
                                                     number="{ parts:[ {path:'contractModel>NetAmount'}, {path:'itemModel>currencycode'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
                                                     unit="{itemModel>currencycode}"/>
+                                                <ObjectNumber number ="{path: 'itemModel>id'}"  ></ObjectNumber>
+                                                <ObjectNumber number="{path: 'itemModel>sku'}" ></ObjectNumber>
+                                                <!-- <Text text="{itemModel>description}" ></Text> -->
+                                                <Text text="{itemModel>stat}" ></Text>
+                                                <ObjectNumber number="{itemModel>pack}" ></ObjectNumber>
+                                                <ObjectNumber number="{itemModel>totalretailamount}" ></ObjectNumber>
+                                                <ObjectNumber number="{itemModel>highlight}" ></ObjectNumber>
+                                                <ObjectNumber number="{itemModel>size}" ></ObjectNumber>
+                                                <ObjectNumber number="{itemModel>listprice}" ></ObjectNumber>
                                             </cells>
                                         </ColumnListItem>
                                     </items>
@@ -228,7 +265,7 @@
                                     <Label text="Articles Proposed"/>
                                     <Text text="850" ></Text>
                                     <Label text="Total Weight"/>
-                                    <Text text="100 LB" ></Text>
+                                    <Text text="180 KG" ></Text>
                                     <!--<Input fieldGroupIds="detailsData"/>-->
                                     <core:Title text="Cost Info"/>
                                     <Label text="Sales Price"/>

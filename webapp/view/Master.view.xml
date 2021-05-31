@@ -193,6 +193,7 @@
 		<smartTable:customToolbar>
 			<OverflowToolbar design="Transparent">
 				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://add" tooltip="Add Line" text="Add Item" press="onAddOrder"/>
 				<OverflowToolbarButton icon="sap-icon://sales-order" tooltip="Create PO" text="Create PO" press="onApproveOrder"/>
 			</OverflowToolbar>
 		</smartTable:customToolbar>
@@ -363,7 +364,13 @@
 							<cells>
                                 <CheckBox ></CheckBox>
                                 <ObjectIdentifier title="{Department}"></ObjectIdentifier>
-								<ObjectIdentifier title="{SupplierName}" text="{Supplier}"/>
+								<ComboBox value="{SupplierName}" >
+                                    <core:Item key="000001" text="Supplier A"/>
+                                    <core:Item key="000002" text="Supplier B"/>
+                                    <core:Item key="000003" text="Supplier C"/>
+                                    <core:Item key="000004" text="Supplier D"/>
+                                    <core:Item key="000005" text="Supplier E"/>
+                                </ComboBox>
 								<Text text="{SupplyLocation}"/>
 								<ObjectIdentifier title="{ReceivingLocation}"/>
                                 <ObjectIdentifier title="{VSRNumber}"></ObjectIdentifier>
