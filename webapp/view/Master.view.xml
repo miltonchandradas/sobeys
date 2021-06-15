@@ -1,7 +1,5 @@
-<mvc:View xmlns="sap.m" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc" xmlns:layout="sap.ui.layout" xmlns:smartTable="sap.ui.comp.smarttable" 
-    xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:microChart="sap.suite.ui.microchart"   xmlns:v="sap.ui.comp.variants"
-    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
-    controllerName="com.sap.sobeys.controller.Master">
+<mvc:View xmlns="sap.m" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc" xmlns:layout="sap.ui.layout" 
+          xmlns:smartTable="sap.ui.comp.smarttable" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:microChart="sap.suite.ui.microchart" xmlns:v="sap.ui.comp.variants" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" controllerName="com.sap.sobeys.controller.Master">
 	<f:DynamicPage id="dynamicPageId" headerExpanded="true" toggleHeaderOnTitleClick="true">
 		<!-- DynamicPage Title -->
 		<f:title>
@@ -17,8 +15,7 @@
 		<!-- DynamicPage Header -->
 		<f:header>
 			<f:DynamicPageHeader pinnable="true">
-	         <v:VariantManagement id="vm" select="onSelect" save="onSave" enabled="true" manage="onManage"
-                         showExecuteOnSelection="true" showShare="false" variantItems="{/VariantSet}">
+	         <v:VariantManagement id="vm" select="onSelect" save="onSave" enabled="true" manage="onManage" showExecuteOnSelection="true" showShare="false" variantItems="{/VariantSet}">
                 <v:variantItems>
                     <v:VariantItem text="{VAR_NAME}" key="{VAR_KEY}"> </v:VariantItem>
             </v:variantItems>                             
@@ -34,7 +31,7 @@
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem1" groupName="basicFilter" label="Receiving Location" visibleInFilterBar="true">
 							<fb:control>
-								<MultiComboBox selectedKeys="000001,000002,000005" selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
+								<MultiComboBox selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
 									<core:ListItem key="000001" text="Warehouse A" additionalText="1"/>
 									<core:ListItem key="000002" text="Warehouse B" additionalText="2"/>
 									<core:ListItem key="000003" text="Warehouse C" additionalText="3"/>
@@ -54,6 +51,16 @@
 									</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
+                        <fb:FilterGroupItem  name="testBU" groupName="basicFilter" label="Buying Unit" visibleInFilterBar="true">
+                            <fb:control>
+                            	<MultiInput
+						            id="multiInput"
+						            valueHelpOnly="true"
+					            	valueHelpRequest=".onValueHelpRequested"
+					            />
+
+                            </fb:control>
+                        </fb:FilterGroupItem>
 						<fb:FilterGroupItem name="dateFilterItem1" groupName="basicFilter" label="Order Date" visibleInFilterBar="true">
 							<fb:control>
 								<DatePicker value="{path: 'dateModel>/OrderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
@@ -67,9 +74,9 @@
 						<fb:FilterGroupItem name="filterItem3" groupName="basicFilter" label="Status" visibleInFilterBar="true">
 							<fb:control>
 								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
-									<core:ListItem key="101" text="Ready" />
-									<core:ListItem key="102" text="Review" />
-									<core:ListItem key="103" text="Urgent Review" />
+									<core:ListItem key="101" text="Ready"/>
+									<core:ListItem key="102" text="Review"/>
+									<core:ListItem key="103" text="Urgent Review"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -84,64 +91,64 @@
                         <fb:FilterGroupItem name="filterItem5" groupName="basicFilter" label="Temp Zone" visibleInFilterBar="false">
 							<fb:control>
 								<MultiComboBox selectionChange=".onFilterChange" showSecondaryValues="false">
-									<core:ListItem key="101" text="Normal" />
-									<core:ListItem key="102" text="Refrigerated" />
-									<core:ListItem key="103" text="Frozen" />
+									<core:ListItem key="101" text="Normal"/>
+									<core:ListItem key="102" text="Refrigerated"/>
+									<core:ListItem key="103" text="Frozen"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem6" groupName="basicFilter" label="Supplier Number" visibleInFilterBar="false">
 							<fb:control>
 								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
-									<core:ListItem key="101" text="000001" />
-									<core:ListItem key="102" text="000002" />
-									<core:ListItem key="103" text="000003" />
-									<core:ListItem key="103" text="000004" />
-									<core:ListItem key="103" text="000005" />
+									<core:ListItem key="101" text="000001"/>
+									<core:ListItem key="102" text="000002"/>
+									<core:ListItem key="103" text="000003"/>
+									<core:ListItem key="103" text="000004"/>
+									<core:ListItem key="103" text="000005"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem7" groupName="basicFilter" label="Supplier Name" visibleInFilterBar="false">
 							<fb:control>
 								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
-									<core:ListItem key="101" text="Supplier A" />
-									<core:ListItem key="102" text="Supplier B" />
-									<core:ListItem key="103" text="Supplier C" />
-									<core:ListItem key="103" text="Supplier D" />
-									<core:ListItem key="103" text="Supplier E" />
+									<core:ListItem key="101" text="Supplier A"/>
+									<core:ListItem key="102" text="Supplier B"/>
+									<core:ListItem key="103" text="Supplier C"/>
+									<core:ListItem key="103" text="Supplier D"/>
+									<core:ListItem key="103" text="Supplier E"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem8" groupName="basicFilter" label="VSR #" visibleInFilterBar="false">
 							<fb:control>
 								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
-									<core:ListItem key="101" text="Supplier A" />
-									<core:ListItem key="102" text="Supplier B" />
-									<core:ListItem key="103" text="Supplier C" />
-									<core:ListItem key="103" text="Supplier D" />
-									<core:ListItem key="103" text="Supplier E" />
+									<core:ListItem key="101" text="Supplier A"/>
+									<core:ListItem key="102" text="Supplier B"/>
+									<core:ListItem key="103" text="Supplier C"/>
+									<core:ListItem key="103" text="Supplier D"/>
+									<core:ListItem key="103" text="Supplier E"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem9" groupName="basicFilter" label="Buyer #" visibleInFilterBar="false">
 							<fb:control>
 								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
-									<core:ListItem key="101" text="Supplier A" />
-									<core:ListItem key="102" text="Supplier B" />
-									<core:ListItem key="103" text="Supplier C" />
-									<core:ListItem key="103" text="Supplier D" />
-									<core:ListItem key="103" text="Supplier E" />
+									<core:ListItem key="101" text="Buyer A"/>
+									<core:ListItem key="102" text="Buyer B"/>
+									<core:ListItem key="103" text="Buyer C"/>
+									<core:ListItem key="103" text="Buyer D"/>
+									<core:ListItem key="103" text="Buyer E"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem10" groupName="basicFilter" label="Article #" visibleInFilterBar="false">
 							<fb:control>
 								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="false">
-									<core:ListItem key="101" text="Supplier A" />
-									<core:ListItem key="102" text="Supplier B" />
-									<core:ListItem key="103" text="Supplier C" />
-									<core:ListItem key="103" text="Supplier D" />
-									<core:ListItem key="103" text="Supplier E" />
+									<core:ListItem key="101" text="Supplier A"/>
+									<core:ListItem key="102" text="Supplier B"/>
+									<core:ListItem key="103" text="Supplier C"/>
+									<core:ListItem key="103" text="Supplier D"/>
+									<core:ListItem key="103" text="Supplier E"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -159,20 +166,14 @@
 						<fb:FilterGroupItem name="filterItem11" groupName="basicFilter" label="Transportation Partner" visibleInFilterBar="false">
 							<fb:control>
 								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
-									<core:ListItem key="101" text="FedEx" />
-									<core:ListItem key="102" text="UPS" />
-									<core:ListItem key="103" text="DHL" />
-									<core:ListItem key="103" text="Canpar Express" />
-									<core:ListItem key="103" text="Purolator" />
+									<core:ListItem key="101" text="True"/>
+									<core:ListItem key="102" text="False"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem12" groupName="basicFilter" label="Vendor Lead Time" visibleInFilterBar="false">
 							<fb:control>
-	                        	<Input
-			                        id="inputNumber"
-		                        	type="Number"
-		                        	class="sapUiSmallMarginBottom" />
+	                        	<Input id="inputNumber" type="Number" class="sapUiSmallMarginBottom"/>
 							</fb:control>
 						</fb:FilterGroupItem>
 
@@ -184,177 +185,232 @@
 		<f:content>
  
 			<VBox fitContainer="true">
-          	<smartTable:SmartTable id="poTable" entitySet="/"  smartFilterId="smartFilterBar" tableType="ResponsiveTable"
-		                                            useExportToExcel="true"  useVariantManagement="false"
-		                                            useTablePersonalisation="true" header="Proposed Orders" showRowCount="true"
-		                                            persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true"
-                                                    editTogglable="false"  app:useSmartToggle="true" demandPopin="true"
-		                                            class="sapUiResponsiveContentPadding" >
-		<smartTable:customToolbar>
-			<OverflowToolbar design="Transparent">
-				<ToolbarSpacer/>
-				<OverflowToolbarButton icon="sap-icon://add" tooltip="Add Line" text="Add Item" press="onAddOrder"/>
-				<OverflowToolbarButton icon="sap-icon://sales-order" tooltip="Create PO" text="Create PO" press="onApproveOrder"/>
-			</OverflowToolbar>
-		</smartTable:customToolbar>
-				<Table sticky="ColumnHeaders,HeaderToolbar" >
+          	<smartTable:SmartTable id="poTable" entitySet="/" smartFilterId="smartFilterBar" useExportToExcel="true"  
+              useTablePersonalisation="true" header="Proposed Orders" showRowCount="true" persistencyKey="ST_Explored" 
+              enableAutoBinding="true" editTogglable="false" app:useSmartToggle="true" demandPopin="true" 
+               editable="true"  tableType="ResponsiveTable" useVariantManagement="false" class="sapUiNoContentPadding">
+                <smartTable:customToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer/>
+                        <ComboBox value="{SupplierName}" showSecondaryValues= "true" maxWidth="5%">
+                            <core:ListItem key="000001" text="Supplier A" additionalText="000001"/>
+                            <core:ListItem key="000002" text="Supplier B" additionalText="000002"/>
+                            <core:ListItem key="000003" text="Supplier C" additionalText="000003"/>
+                            <core:ListItem key="000004" text="Supplier D" additionalText="000004"/>
+                            <core:ListItem key="000005" text="Supplier E" additionalText="000005"/>
+                        </ComboBox>
+                        <OverflowToolbarButton icon="sap-icon://edit" text="Update Supplier" tooltip="Update Supplier" press="onSupplierUpdate"/>
+                        <DatePicker id="ddpick"  width="5%"/>
+                        <OverflowToolbarButton icon="sap-icon://edit-outside" text="Update Delivery Date" tooltip="Update Delivery Date" press="onDateUpdate"/>
+                        <ToolbarSpacer width="20px"/>
+                        <OverflowToolbarButton icon="sap-icon://delete" tooltip="Delete Line" text="Delete Item" press="onDeleteOrder"/>
+                        <OverflowToolbarButton icon="sap-icon://add" tooltip="Add Line" text="Add Item" press="onAddOrder"/>
+                        <OverflowToolbarButton icon="sap-icon://sales-order" tooltip="Create PO" text="Create PO" press="onApproveOrder"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+                <Table sticky="ColumnHeaders,HeaderToolbar,InfoToolbar">
 				<columns>
 						<Column>
                            <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "Check"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Check&quot;}"/>
 					        </customData>
 							<Text text=""/>
 						</Column>
     					<Column visible="false">
                             <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "Department",  "leadingProperty": "Department", "sortProperty": "Department", "additionalProperty": "Department", "description": "Department"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Department&quot;,  &quot;leadingProperty&quot;: &quot;Department&quot;, &quot;sortProperty&quot;: &quot;Department&quot;, &quot;additionalProperty&quot;: &quot;Department&quot;, &quot;description&quot;: &quot;Department&quot;}"/>
 					        </customData>
 							<Text text="Department"/>
 						</Column>
 						<Column>
                             <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "Supplier",  "leadingProperty": "Supplier", "sortProperty": "Supplier", "additionalProperty": "Supplier", "description": "Supplier"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Supplier&quot;,  &quot;leadingProperty&quot;: &quot;Supplier&quot;, &quot;sortProperty&quot;: &quot;Supplier&quot;, &quot;additionalProperty&quot;: &quot;Supplier&quot;, &quot;description&quot;: &quot;Supplier&quot;}"/>
 					        </customData>
 							<Text text="Supplier"/>
 						</Column>
 						<Column sortIndicator="None">
                             <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "SupplyLocation",  "leadingProperty": "SupplyLocation", "sortProperty": "SupplyLocation", "additionalProperty": "SupplyLocation", "description": "SupplyLocation"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;SupplyLocation&quot;,  &quot;leadingProperty&quot;: &quot;SupplyLocation&quot;, &quot;sortProperty&quot;: &quot;SupplyLocation&quot;, &quot;additionalProperty&quot;: &quot;SupplyLocation&quot;, &quot;description&quot;: &quot;SupplyLocation&quot;}"/>
 					        </customData>
 							<Text text="Supplying Location"/>
 						</Column>
 						<Column minScreenWidth="Desktop">
                           <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "ReceivingLocation",  "leadingProperty": "ReceivingLocation", "sortProperty": "ReceivingLocation", "additionalProperty": "ReceivingLocation", "description": "ReceivingLocation"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;ReceivingLocation&quot;,  &quot;leadingProperty&quot;: &quot;ReceivingLocation&quot;, &quot;sortProperty&quot;: &quot;ReceivingLocation&quot;, &quot;additionalProperty&quot;: &quot;ReceivingLocation&quot;, &quot;description&quot;: &quot;ReceivingLocation&quot;}"/>
 					        </customData>
 							<Text text="CFC Name"/>
 						</Column>
 						<Column minScreenWidth="Desktop">
                           <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "VSRNumber",  "leadingProperty": "VSRNumber", "sortProperty": "VSRNumber", "additionalProperty": "VSRNumber", "description": "VSRNumber"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;VSRNumber&quot;,  &quot;leadingProperty&quot;: &quot;VSRNumber&quot;, &quot;sortProperty&quot;: &quot;VSRNumber&quot;, &quot;additionalProperty&quot;: &quot;VSRNumber&quot;, &quot;description&quot;: &quot;VSRNumber&quot;}"/>
 					        </customData>
 							<Text text="VSR #"/>
 						</Column>
 						<Column minScreenWidth="Desktop">
                           <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "BuyerNumber",  "leadingProperty": "BuyerNumber", "sortProperty": "BuyerNumber", "additionalProperty": "BuyerNumber", "description": "BuyerNumber"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;BuyerNumber&quot;,  &quot;leadingProperty&quot;: &quot;BuyerNumber&quot;, &quot;sortProperty&quot;: &quot;BuyerNumber&quot;, &quot;additionalProperty&quot;: &quot;BuyerNumber&quot;, &quot;description&quot;: &quot;BuyerNumber&quot;}"/>
 					        </customData>
 							<Text text="Buyer #"/>
 						</Column>
                         <Column minScreenWidth="Desktop">
                           <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "ArticleNumber",  "leadingProperty": "ArticleNumber", "sortProperty": "ArticleNumber", "additionalProperty": "ArticleNumber", "description": "ArticleNumber"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;ArticleNumber&quot;,  &quot;leadingProperty&quot;: &quot;ArticleNumber&quot;, &quot;sortProperty&quot;: &quot;ArticleNumber&quot;, &quot;additionalProperty&quot;: &quot;ArticleNumber&quot;, &quot;description&quot;: &quot;ArticleNumber&quot;}"/>
 					        </customData>
-                            <Text text="Article #"></Text>
+                            <Text text="Article #"/>
                         </Column>
     					<Column minScreenWidth="Desktop" hAlign="Center">
                           <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "Item",  "leadingProperty": "Item", "sortProperty": "Item", "additionalProperty": "Item", "description": "Item"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Item&quot;,  &quot;leadingProperty&quot;: &quot;Item&quot;, &quot;sortProperty&quot;: &quot;Item&quot;, &quot;additionalProperty&quot;: &quot;Item&quot;, &quot;description&quot;: &quot;Item&quot;}"/>
 					        </customData>
 							<Text text="Item"/>
 						</Column>
 	                    
 						<Column minScreenWidth="Desktop" hAlign="Center">
                           <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "OrdQty",  "leadingProperty": "OrdQty", "sortProperty": "OrdQty", "additionalProperty": "OrdQty", "description": "OrdQty"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;OrdQty&quot;,  &quot;leadingProperty&quot;: &quot;OrdQty&quot;, &quot;sortProperty&quot;: &quot;OrdQty&quot;, &quot;additionalProperty&quot;: &quot;OrdQty&quot;, &quot;description&quot;: &quot;OrdQty&quot;}"/>
 					        </customData>
-							<Text text="Proposed Order Quantity"/>
+							<Text text="Proposed Retail Units"/>
 						</Column>
 						<Column minScreenWidth="Desktop" hAlign="Center">
                           <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "CaseQty",  "leadingProperty": "CaseQty", "sortProperty": "CaseQty", "additionalProperty": "CaseQty", "description": "CaseQty"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;CaseQty&quot;,  &quot;leadingProperty&quot;: &quot;CaseQty&quot;, &quot;sortProperty&quot;: &quot;CaseQty&quot;, &quot;additionalProperty&quot;: &quot;CaseQty&quot;, &quot;description&quot;: &quot;CaseQty&quot;}"/>
 					        </customData>
-							<Text text="Proposed Case Quantity"/>
+							<Text text="Proposed Buying Units"/>
 						</Column>
+							
 						<Column minScreenWidth="Desktop">
                          <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "OrderDate",  "leadingProperty": "OrderDate", "sortProperty": "OrderDate", "additionalProperty": "OrderDate", "description": "OrderDate"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;OrderDate&quot;,  &quot;leadingProperty&quot;: &quot;OrderDate&quot;, &quot;sortProperty&quot;: &quot;OrderDate&quot;, &quot;additionalProperty&quot;: &quot;OrderDate&quot;, &quot;description&quot;: &quot;OrderDate&quot;}"/>
 					        </customData>
 							<Text text="Order Date"/>
 						</Column>
 						<Column minScreenWidth="Desktop">
                          <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "DeliveryDate",  "leadingProperty": "DeliveryDate", "sortProperty": "DeliveryDate", "additionalProperty": "DeliveryDate", "description": "DeliveryDate"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;DeliveryDate&quot;,  &quot;leadingProperty&quot;: &quot;DeliveryDate&quot;, &quot;sortProperty&quot;: &quot;DeliveryDate&quot;, &quot;additionalProperty&quot;: &quot;DeliveryDate&quot;, &quot;description&quot;: &quot;DeliveryDate&quot;}"/>
 					        </customData>
 							<Text text="Delivery Date"/>
 						</Column>
 						<Column minScreenWidth="Desktop">
                          <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "ShipDate",  "leadingProperty": "ShipDate", "sortProperty": "ShipDate", "additionalProperty": "ShipDate", "description": "ShipDate"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;ShipDate&quot;,  &quot;leadingProperty&quot;: &quot;ShipDate&quot;, &quot;sortProperty&quot;: &quot;ShipDate&quot;, &quot;additionalProperty&quot;: &quot;ShipDate&quot;, &quot;description&quot;: &quot;ShipDate&quot;}"/>
 					        </customData>
 							<Text text="Ship Date"/>
 						</Column>
                         <Column minScreenWidth="Desktop">
                          <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "TransportationPartner",  "leadingProperty": "TransportationPartner", "sortProperty": "TransportationPartner", "additionalProperty": "TransportationPartner", "description": "TransportationPartner"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;TransportationPartner&quot;,  &quot;leadingProperty&quot;: &quot;TransportationPartner&quot;, &quot;sortProperty&quot;: &quot;TransportationPartner&quot;, &quot;additionalProperty&quot;: &quot;TransportationPartner&quot;, &quot;description&quot;: &quot;TransportationPartner&quot;}"/>
 					        </customData>
-                            <Text text="Transportation Partner"></Text>
+                            <Text text="Transportation Partner"/>
                         </Column>                        
 						<Column>
                          <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "Status",  "leadingProperty": "Status", "sortProperty": "Status", "additionalProperty": "Status", "description": "Status"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Status&quot;,  &quot;leadingProperty&quot;: &quot;Status&quot;, &quot;sortProperty&quot;: &quot;Status&quot;, &quot;additionalProperty&quot;: &quot;Status&quot;, &quot;description&quot;: &quot;Status&quot;}"/>
 					        </customData>
 							<Text text="Status"/>
 						</Column>
 						<Column>
                          <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "Exception",  "leadingProperty": "Exception", "sortProperty": "ExceptionLevel", "additionalProperty": "Exception", "description": "Exception"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Exception&quot;,  &quot;leadingProperty&quot;: &quot;Exception&quot;, &quot;sortProperty&quot;: &quot;ExceptionLevel&quot;, &quot;additionalProperty&quot;: &quot;Exception&quot;, &quot;description&quot;: &quot;Exception&quot;}"/>
 					        </customData>
 							<Text text="Exceptions"/>
 						</Column>
                         <Column visible="false">
                             <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "TempZone",  "leadingProperty": "TempZone", "sortProperty": "TempZone", "additionalProperty": "TempZone", "description": "TempZone"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;TempZone&quot;,  &quot;leadingProperty&quot;: &quot;TempZone&quot;, &quot;sortProperty&quot;: &quot;TempZone&quot;, &quot;additionalProperty&quot;: &quot;TempZone&quot;, &quot;description&quot;: &quot;TempZone&quot;}"/>
 					        </customData>
 							<Text text="Temp Zone"/>
 						</Column>
     					<Column visible="false">
                             <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "OrderReach",  "leadingProperty": "OrderReach", "sortProperty": "OrderReach", "additionalProperty": "OrderReach", "description": "OrderReach"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;OrderReach&quot;,  &quot;leadingProperty&quot;: &quot;OrderReach&quot;, &quot;sortProperty&quot;: &quot;OrderReach&quot;, &quot;additionalProperty&quot;: &quot;OrderReach&quot;, &quot;description&quot;: &quot;OrderReach&quot;}"/>
 					        </customData>
 							<Text text="Order Reach"/>
 						</Column>
     					<Column visible="false">
                             <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "VendorLeadTime",  "leadingProperty": "VendorLeadTime", "sortProperty": "VendorLeadTime", "additionalProperty": "VendorLeadTime", "description": "VendorLeadTime"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;VendorLeadTime&quot;,  &quot;leadingProperty&quot;: &quot;VendorLeadTime&quot;, &quot;sortProperty&quot;: &quot;VendorLeadTime&quot;, &quot;additionalProperty&quot;: &quot;VendorLeadTime&quot;, &quot;description&quot;: &quot;VendorLeadTime&quot;}"/>
 					        </customData>
 							<Text text="Vendor Lead Time"/>
 						</Column>
    				     	<Column visible="false">
                             <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "PONumber",  "leadingProperty": "PONumber", "sortProperty": "PONumber", "additionalProperty": "PONumber", "description": "PONumber"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;PONumber&quot;,  &quot;leadingProperty&quot;: &quot;PONumber&quot;, &quot;sortProperty&quot;: &quot;PONumber&quot;, &quot;additionalProperty&quot;: &quot;PONumber&quot;, &quot;description&quot;: &quot;PONumber&quot;}"/>
 					        </customData>
 							<Text text="PO Number"/>
 						</Column>
    					    <Column visible="false">
                             <customData>
-						        <core:CustomData key="p13nData"
-										 value='\{"columnKey": "LastChanged",  "leadingProperty": "LastChanged", "sortProperty": "LastChanged", "additionalProperty": "LastChanged", "description": "LastChanged"}' />
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;LastChanged&quot;,  &quot;leadingProperty&quot;: &quot;LastChanged&quot;, &quot;sortProperty&quot;: &quot;LastChanged&quot;, &quot;additionalProperty&quot;: &quot;LastChanged&quot;, &quot;description&quot;: &quot;LastChanged&quot;}"/>
 					        </customData>
 							<Text text="Last Changed"/>
 						</Column>
-   	
+    					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;ListPrice&quot;,  &quot;leadingProperty&quot;: &quot;ListPrice&quot;, &quot;sortProperty&quot;: &quot;ListPrice&quot;, &quot;additionalProperty&quot;: &quot;ListPrice&quot;, &quot;description&quot;: &quot;ListPrice&quot;}"/>
+					        </customData>
+							<Text text="List Price"/>
+						</Column>
+    					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Discount&quot;,  &quot;leadingProperty&quot;: &quot;Discount&quot;, &quot;sortProperty&quot;: &quot;Discount&quot;, &quot;additionalProperty&quot;: &quot;Discount&quot;, &quot;description&quot;: &quot;Discount&quot;}"/>
+					        </customData>
+							<Text text="Discount"/>
+						</Column>
+    					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;DiscountType&quot;,  &quot;leadingProperty&quot;: &quot;DiscountType&quot;, &quot;sortProperty&quot;: &quot;DiscountType&quot;, &quot;additionalProperty&quot;: &quot;DiscountType&quot;, &quot;description&quot;: &quot;DiscountType&quot;}"/>
+					        </customData>
+							<Text text="Discount Type"/>
+						</Column>
+    					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;NetPrice&quot;,  &quot;leadingProperty&quot;: &quot;NetPrice&quot;, &quot;sortProperty&quot;: &quot;NetPrice&quot;, &quot;additionalProperty&quot;: &quot;NetPrice&quot;, &quot;description&quot;: &quot;NetPrice&quot;}"/>
+					        </customData>
+							<Text text="Esitimated Net Price"/>
+						</Column>
+    					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;SKU&quot;,  &quot;leadingProperty&quot;: &quot;SKU&quot;, &quot;sortProperty&quot;: &quot;SKU&quot;, &quot;additionalProperty&quot;: &quot;SKU&quot;, &quot;description&quot;: &quot;SKU&quot;}"/>
+					        </customData>
+							<Text text="SKU"/>
+						</Column>
+    					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;UPC&quot;,  &quot;leadingProperty&quot;: &quot;UPC&quot;, &quot;sortProperty&quot;: &quot;UPC&quot;, &quot;additionalProperty&quot;: &quot;UPC&quot;, &quot;description&quot;: &quot;UPC&quot;}"/>
+					        </customData>
+							<Text text="UPC"/>
+						</Column>
+    					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Pack&quot;,  &quot;leadingProperty&quot;: &quot;Pack&quot;, &quot;sortProperty&quot;: &quot;Pack&quot;, &quot;additionalProperty&quot;: &quot;Pack&quot;, &quot;description&quot;: &quot;Pack&quot;}"/>
+					        </customData>
+							<Text text="Pack Size"/>
+						</Column>
+    					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Weight&quot;,  &quot;leadingProperty&quot;: &quot;Weight&quot;, &quot;sortProperty&quot;: &quot;Weight&quot;, &quot;additionalProperty&quot;: &quot;Weight&quot;, &quot;description&quot;: &quot;Weight&quot;}"/>
+					        </customData>
+							<Text text="Weight"/>
+						</Column>
+    					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;TI&quot;,  &quot;leadingProperty&quot;: &quot;TI&quot;, &quot;sortProperty&quot;: &quot;TI&quot;, &quot;additionalProperty&quot;: &quot;TI&quot;, &quot;description&quot;: &quot;TI&quot;}"/>
+					        </customData>
+							<Text text="TI"/>
+						</Column>
+    					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;HI&quot;,  &quot;leadingProperty&quot;: &quot;HI&quot;, &quot;sortProperty&quot;: &quot;HI&quot;, &quot;additionalProperty&quot;: &quot;HI&quot;, &quot;description&quot;: &quot;HI&quot;}"/>
+					        </customData>
+							<Text text="HI"/>
+						</Column>
+    					    <Column visible="false">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Reason&quot;,  &quot;leadingProperty&quot;: &quot;Reason&quot;, &quot;sortProperty&quot;: &quot;Reason&quot;, &quot;additionalProperty&quot;: &quot;Reason&quot;, &quot;description&quot;: &quot;Reason&quot;}"/>
+					        </customData>
+							<Text text=" Change Reason"/>
+						</Column>
+   	 
 						<!-- <Column>
 							<Text text="Actions"/>
 						</Column> -->
@@ -362,39 +418,34 @@
 					<items>
 						<ColumnListItem type="Navigation" press=".onListItemPress">
 							<cells>
-                                <CheckBox ></CheckBox>
-                                <ObjectIdentifier title="{Department}"></ObjectIdentifier>
-								<ComboBox value="{SupplierName}" >
-                                    <core:Item key="000001" text="Supplier A"/>
-                                    <core:Item key="000002" text="Supplier B"/>
-                                    <core:Item key="000003" text="Supplier C"/>
-                                    <core:Item key="000004" text="Supplier D"/>
-                                    <core:Item key="000005" text="Supplier E"/>
+                                <HBox>
+                                    <CheckBox/>
+                                    <Button icon="sap-icon://copy" enabled="true" press=".onApproveContractPress"/>
+                                </HBox>
+                                <ObjectIdentifier title="{Department}"/>
+								<ComboBox value="{SupplierName}" change="onSubmitDialogPress" showSecondaryValues= "true">
+                                    <core:ListItem key="000001" text="Supplier A" additionalText="000001"/>
+                                    <core:ListItem key="000002" text="Supplier B" additionalText="000002"/>
+                                    <core:ListItem key="000003" text="Supplier C" additionalText="000003"/>
+                                    <core:ListItem key="000004" text="Supplier D" additionalText="000004"/>
+                                    <core:ListItem key="000005" text="Supplier E" additionalText="000005"/>
                                 </ComboBox>
 								<Text text="{SupplyLocation}"/>
 								<ObjectIdentifier title="{ReceivingLocation}"/>
-                                <ObjectIdentifier title="{VSRNumber}"></ObjectIdentifier>
-                                <ObjectIdentifier title="{BuyerNumber}"></ObjectIdentifier>
-                                <ObjectIdentifier title="{ArticleNumber}"></ObjectIdentifier>
+                                <ObjectIdentifier title="{VSRNumber}"/>
+                                <ObjectIdentifier title="{BuyerNumber}"/>
+                                <ObjectIdentifier title="{ArticleNumber}"/>
 								<ObjectIdentifier title="{ItemDescription}" text="{Item}"/>
-								<ObjectNumber number="{ parts:[ {path:'OrdQty'}, {path: 'RetailUnits'} ], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false} }" />
-								<Input
-			                        id="caseNumber"
-                                    value="{CaseQty}"
-		                        	type="Number"
-		                        	class="sapUiSmallMarginBottom" />
-
+								<ObjectNumber number="{ parts:[ {path:'OrdQty'}, {path: 'RetailUnits'} ], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false} }" unit="{RetailUnits}"/>
+								<VBox >
+                                <Input id="caseNumber" value="{Cases}" type="Number" class="sapUiSmallMarginBottom"  change="onSubmitDialogPress"/>
+                                <ObjectIdentifier title="{OrdUnitQty}" />
+                                </VBox>
                                 <Text text="{path: 'OrderDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
-								<DatePicker
-			                        id="DP5"
-			                        value="{DeliveryDate}"
-			                        valueFormat="MM/dd/yyyy"
-			                        displayFormat="medium"
-	                    			change="handleChange"
-		                            	class="sapUiSmallMarginBottom"/>
+								<DatePicker id="DP5" value="{DeliveryDate}" valueFormat="MM/dd/yyyy" displayFormat="medium" change="onSubmitDialogPress" class="sapUiSmallMarginBottom"/>
 
                                 <Text text="{path: 'ShipDate', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
-	                            <ObjectIdentifier title="{TransportationPartner}"></ObjectIdentifier>
+	                            <ObjectIdentifier title="{TransportationPartner}"/>
 								<ObjectStatus text="{Status}" state="{path: 'Status' , formatter: '.formatter.statusText' }"/>
 	 							<microChart:StackedBarMicroChart size="Responsive" press="press">
 									<microChart:bars>
@@ -403,13 +454,24 @@
 										<microChart:StackedBarMicroChartBar value="{path:'ExceptionLevel',formatter: '.formatter.calcInvalid'}" valueColor="red"/>
 									</microChart:bars>
 								</microChart:StackedBarMicroChart>
-	                            <ObjectIdentifier title="{TempZone}"></ObjectIdentifier>
+	                            <ObjectIdentifier title="{TempZone}"/>
                                 <Text text="{path: 'OrderReach', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
-	                            <ObjectIdentifier title="{VendorLeadTime}"></ObjectIdentifier>
-	                           <ObjectIdentifier title="{PONumber}"></ObjectIdentifier>
-	                           <ObjectIdentifier title="{path: 'LastChanged', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }" text="{ChangedBy}"></ObjectIdentifier>
-								<!-- <Button text="Approve" enabled="{path:'status' , formatter: '.formatter.actionEnabled' }" press=".onApproveContractPress"></Button> -->
-							</cells>
+	                            <ObjectIdentifier title="{VendorLeadTime}"/>
+	                           <ObjectIdentifier title="{PONumber}"/>
+	                           <ObjectIdentifier title="{path: 'LastChanged', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }" text="{ChangedBy}"/>
+	                            <ObjectNumber number="{ parts:[ {path:'ListPrice'}, {path:'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }" unit="{Currency}"/>
+ 		                        <Text text="{DiscountAmount}"/>
+                                                <Text text="{DiscountType}"/>
+                                                <ObjectNumber number="{ parts:[ {path:'NetAmount'}, {path:'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }" unit="{Currency}"/>
+                                                <ObjectNumber number="{SKUID}"/>
+                                                <ObjectNumber number="{UPC}"/>
+                                                <ObjectNumber number="{Pack}"/>
+                                                <ObjectNumber number="{Weight}"/>
+                                                <ObjectNumber number="{TI}"/>
+                                                <ObjectNumber number="{HI}"/>
+                                                <ObjectIdentifier title="{Reason}"/>
+								
+    				</cells>
 						</ColumnListItem>
 					</items>
 				</Table>

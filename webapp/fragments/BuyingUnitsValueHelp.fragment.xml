@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="Buying Units"
+		ok=".onValueHelpOkPress"
+		cancel=".onValueHelpCancelPress"
+		afterClose=".onValueHelpAfterClose"
+		key="Cases"
+		descriptionKey="Name"
+		supportRanges="true"
+		supportRangesOnly="true"
+	>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

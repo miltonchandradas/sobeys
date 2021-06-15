@@ -52,25 +52,24 @@
                                 <form:content>
                                     <core:Title text="General Info"/>
                                     <Label text="Transportation Partner" ></Label>
-                                    <Text text="UPS" ></Text>
+                                    <Text text="Yes" ></Text>
                                     <Label text="VSR # " ></Label>
                                     <Text text="9894536" ></Text>
                                     <Label text="Total Weight" ></Label>
-                                    <Text text="100 LB" ></Text>
-                                    <Label text="Transportation" ></Label>
+                                    <Text text="1200 KG" ></Text>
+                                    <Label text="Transportation Type" ></Label>
                                     <Text text="Air" ></Text>
-                                   <Label text="Supplying Location"/>
+                                    <Label text="Supplying Location"/>
                                     <Text text="{contractModel>vendor}"></Text>
                                     <Label text="Receiving Location"/>
                                     <Text text="Warehouse A"></Text>
                                     <Label text="Purchase Order Item"/>
                                     <Text text="Ice cream"></Text>
-                                    <Label text="Changed By"/>
+                                    <core:Title text="Change Information"/>
+                                    <Label text="Last Changed By"/>
                                     <Text text="CIMC2"></Text>
                                     <Label text="Changed Reason"/>
                                     <Text text="Minimum threshold"></Text>
-                                    <Label text="Total cost of PO" ></Label>
-                                    <Text text="689.12 CAD" ></Text>
                                     <!--<Input fieldGroupIds="detailsData"/>-->
                                     <core:Title text="Date Info"/>
                                     <Label text="Created On"/>
@@ -81,9 +80,12 @@
                                     <Text text="Mar 3, 2021"></Text>
                                     <Label text="Order Date"/>
                                     <Text text="Feb 4, 2021"></Text>
-                                    <core:Title text="Order History"/>
+                                    <core:Title text="Recent Order History"/>
                                     <Label text="Mar 3, 2021"/>
                                     <Text text="6 BOXES"></Text>
+                                    <Label text="Total cost of PO" ></Label>
+                                    <Text text="689.12 CAD" ></Text>
+   
                                     <Label text="April 21, 2021"/>
                                     <Text text="20 BOXES"></Text>
                                     <Label text="May 4, 2021"/>
@@ -91,110 +93,6 @@
                                 </form:content>
                             </form:SimpleForm>
                         </VBox>
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
-            <uxap:ObjectPageSection id="itemsSection" title="Products">
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection>
-                        <uxap:blocks>
-                            <VBox fitContainer="true">
-                                <Table id="itemsTable" inset="false" items="{itemModel>/}" class="sapFDynamicPageAlignContent" width="auto" alternateRowColors="true">
-                                    <headerToolbar>
-                                        <OverflowToolbar>
-                                            <content>
-                                                <Title text="Products (10)" level="H2"/>
-                                            </content>
-                                            <ToolbarSpacer/>
-                                            <Switch  state="{viewModel>/canEdit}" customTextOn="Edit" customTextOff="Edit">
-                                            
-                                <layoutData>
-                                    <FlexItemData growFactor="1"/>
-                                </layoutData>
-                            </Switch>
-                            <Button icon="sap-icon://save" text="Save" press=".onSave"></Button>
-                                        </OverflowToolbar>
-                                    </headerToolbar>
-<columns>
-                                        <Column width="20%">
-                                            <Text text="Item"/>
-                                        </Column>
-                                        <Column minScreenWidth="Desktop">
-                                            <Text text="Size"/>
-                                        </Column>
-                                        <Column minScreenWidth="Desktop">
-                                            <Text text="Planned Quantity"/>
-                                        </Column>
-                                        <Column hAlign="Right">
-                                            <Text text="List Price"/>
-                                        </Column>
-                                        <Column hAlign="Right">
-                                            <Text text="Discount Amount"/>
-                                        </Column>
-                                        <Column>
-                                            <Text text="Discount Type"/>
-                                        </Column>
-                                        <Column hAlign="Center">
-                                            <Text text="Net Amount"/>
-                                        </Column>
-                                        <Column >
-                                            <Text text="Article #"/>
-                                        </Column>
-                                        <Column >
-                                            <Text text="SKUID#"/>
-                                        </Column>
-                                        <!-- <Column hAlign="Center" >
-                                            <Text  text="Description"/>
-                                        </Column> -->
-                                        <Column hAlign="Center">
-                                            <Text text="Buying UOM"/>
-                                        </Column>
-                                        <Column hAlign="Center">
-                                            <Text text="Pack Size"/>
-                                        </Column>
-                                        <Column hAlign="Center">
-                                            <Text text="TI"/>
-                                        </Column>
-                                        <Column hAlign="Center">
-                                            <Text text="HI"/>
-                                        </Column>
-                                        <Column hAlign="Right">
-                                            <Text text="Weight"/>
-                                        </Column>
-                                        <Column hAlign="Right">
-                                            <Text text="Price"/>
-                                        </Column>
-                                        
-                                    </columns>
-                                    <items>
-                                        <ColumnListItem highlight="{itemModel>highlight}">
-                                            <cells>
-                                                <ObjectIdentifier title="{itemModel>description}" text="{itemModel>id}"/>
-                                                <Text text="{itemModel>size}"/>
-                                                <Input  value="{itemModel>quantity}" enabled="{viewModel>/canEdit}" valueState="{itemModel>highlight}" change=".onQuantityChange"></Input>
-                                                <ObjectNumber
-                                                    number="{ parts:[ {path:'itemModel>listprice'}, {path:'itemModel>currencycode'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-                                                    unit="{itemModel>currencycode}"/>
-                                                <Text text="{itemModel>dealamount}"/>
-                                                <Text text="{itemModel>discounttype}"/>
-                                                <ObjectNumber
-                                                    number="{ parts:[ {path:'contractModel>NetAmount'}, {path:'itemModel>currencycode'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-                                                    unit="{itemModel>currencycode}"/>
-                                                <ObjectNumber number ="{path: 'itemModel>id'}"  ></ObjectNumber>
-                                                <ObjectNumber number="{path: 'itemModel>sku'}" ></ObjectNumber>
-                                                <!-- <Text text="{itemModel>description}" ></Text> -->
-                                                <Text text="{itemModel>stat}" ></Text>
-                                                <ObjectNumber number="{itemModel>pack}" ></ObjectNumber>
-                                                <ObjectNumber number="{itemModel>totalretailamount}" ></ObjectNumber>
-                                                <ObjectNumber number="{itemModel>highlight}" ></ObjectNumber>
-                                                <ObjectNumber number="{itemModel>size}" ></ObjectNumber>
-                                                <ObjectNumber number="{itemModel>listprice}" ></ObjectNumber>
-                                            </cells>
-                                        </ColumnListItem>
-                                    </items>
-                                </Table>
-                            </VBox>
-                        </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>
@@ -212,34 +110,31 @@
                                         </OverflowToolbar>
                                     </headerToolbar>
                                     <columns>
-                                        <Column width="20%">
-                                            <Text text="Message Type"/>
+                                        <Column hAlign="Center">
+                                            <Text text="Severity"/>
                                         </Column>
-                                        <Column minScreenWidth="Desktop">
-                                            <Text text="Application Area"/>
-                                        </Column>
-                                        <Column hAlign="Right">
+                                        
+                                        <Column hAlign="Center">
                                             <Text text="Message"/>
                                         </Column>
-                                        <Column hAlign="Right">
-                                            <Text text="Exception Status"/>
+                                        <Column hAlign="Center">
+                                            <Text text="Potential Reasons"/>
                                         </Column>
-                                        <Column>
-                                            <Text text="Message Text"/>
+                                        <Column hAlign="Center">
+                                            <Text text="Possible Actions"/>
                                         </Column>
-                                        <Column hAlign="Right">
-                                            <Text text="Expires on"/>
+                                        <Column hAlign="Center">
+                                            <Text text="Interfaces, Fields, Parameters"/>
                                         </Column>
                                     </columns>
                                     <items>
                                         <ColumnListItem>
                                             <cells>
-                                                <ObjectIdentifier title="{exceptionsModel>type}"/>
-                                                <Text text="{exceptionsModel>area}"/>
-                                                <Text text="{exceptionsModel>message}"/>
-                                                <Text text="{exceptionsModel>status}"/>
-                                                <Text text="{exceptionsModel>text}"/>
-                                                <Text text="{exceptionsModel>expiresOn}"/>
+                                                <ObjectIdentifier title="9"/>
+                                                <FormattedText htmlText="{exceptionsModel>message}"/>
+                                                <FormattedText htmlText="{exceptionsModel>reasons}"/>
+                                                <FormattedText htmlText="{exceptionsModel>actions}"/>
+                                                <FormattedText htmlText="{exceptionsModel>params}"/>
                                             </cells>
                                         </ColumnListItem>
                                     </items>
@@ -280,13 +175,7 @@
             </uxap:ObjectPageSection>
         </uxap:sections>
     <uxap:footer>
-            <OverflowToolbar>
-                <ToolbarSpacer/>
-                <Button type="Accept" text="Approve"
-                     press=".onApprove"/>
-                <Button type="Reject" text="Cancel" press=".onCancel"/>
-            </OverflowToolbar>
-        </uxap:footer>
+    </uxap:footer>
     </uxap:ObjectPageLayout>
     
 </mvc:View>

@@ -1,174 +1,176 @@
 {
-	"_version": "1.12.0",
-	"sap.app": {
-		"_version": "1.3.0",
-		"id": "com.sap.sobeys",
-		"type": "application",
-		"i18n": "i18n/i18n.properties",
-		"applicationVersion": {
-			"version": "1.0.0"
-		},
-		"title": "{{appTitle}}",
-		"description": "{{appDescription}}",
-		"sourceTemplate": {
-			"id": "ui5template.basicSAPUI5ApplicationProject",
-			"version": "1.40.12"
-		}
+    "_version": "1.12.0",
+    "sap.app": {
+        "_version": "1.3.0",
+        "id": "com.sap.sobeys",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "sourceTemplate": {
+            "id": "ui5template.basicSAPUI5ApplicationProject",
+            "version": "1.40.12"
+        }
     },
     "sap.cloud": {
         "service": "fnr"
     },
-	"sap.ui": {
-		"technology": "UI5",
-		"_version": "1.3.0",
-		"supportedThemes": [
-			"sap_belize"
-		],
-		"icons": {
-			"icon": "",
-			"favIcon": "",
-			"phone": "",
-			"phone@2": "",
-			"tablet": "",
-			"tablet@2": ""
-		},
-		"deviceTypes": {
-			"desktop": true,
-			"tablet": true,
-			"phone": true
-		}
-	},
-	"sap.ui5": {
-		"_version": "1.2.0",
-		"rootView": {
-			"viewName": "com.sap.sobeys.view.App",
-			"type": "XML",
-			"async": true,
-			"id": "fcl"
-		},
-		"dependencies": {
-			"minUI5Version": "1.60.0",
-			"libs": {
-				"sap.ui.core": {},
-				"sap.m": {},
-				"sap.f": {},
-				"sap.uxap": {}
-			}
-		},
-		"config": {
-			"fullWidth": true
-		},
-		"contentDensities": {
-			"compact": true,
-			"cozy": true
-		},
-		"models": {
-			"i18n": {
-				"type": "sap.ui.model.resource.ResourceModel",
-				"settings": {
-					"bundleName": "com.sap.sobeys.i18n.i18n"
-				}
-			},
-			"": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./model/Orders.json"
-			},
-			"exceptionsModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./model/Exceptions.json"
-			},
-			"productModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./model/Products.json"
-			},
-			"departmentModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./model/Departments.json"
-			},
-			"vendorModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./model/Vendors.json"
-			},
-			"itemModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./model/Items.json"
-			},
-			"contractModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./model/Contracts.json"
-			},
-			"categoryModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./model/Categories.json"
-			},
-			"currencyModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./model/Currency.json"
-			},
-			"supplierModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./model/Suppliers.json"
-			},
-			"adzonesModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./model/AdZones.json"
-			}
-		},
-		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			]
-		},
-		"routing": {
-			"config": {
-				"routerClass": "sap.f.routing.Router",
-				"viewType": "XML",
-				"viewPath": "com.sap.sobeys.view",
-				"controlId": "flexibleColumnLayout",
-				"transition": "slide",
-				"bypassed": {
-					"target": "notFound"
-				},
-				"async": true
-			},
-			"routes": [
-				{
-					"pattern": ":layout:",
-					"name": "master",
-					"target": [
-						"master",
-						"detail"
-					]
-				},
-				{
-					"pattern": "detail/{contract}/{layout}",
-					"name": "detail",
-					"target": [
-						"master",
-						"detail"
-					]
-				}
-			],
-			"targets": {
-				"master": {
-					"viewName": "Master",
-					"controlAggregation": "beginColumnPages"
-				},
-				"detail": {
-					"viewName": "Detail",
-					"controlAggregation": "midColumnPages"
-				},
-				"notFound": {
-					"viewId": "notFound",
-					"viewName": "NotFound"
-				}
-			}
-		}
-	},
-	"sap.platform.hcp": {
-		"uri": "webapp",
-		"_version": "1.1.0"
-	}
+    "sap.ui": {
+        "technology": "UI5",
+        "_version": "1.3.0",
+        "supportedThemes": [
+            "sap_belize"
+        ],
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "_version": "1.2.0",
+        "rootView": {
+            "viewName": "com.sap.sobeys.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "fcl"
+        },
+        "dependencies": {
+            "minUI5Version": "1.60.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.f": {},
+                "sap.uxap": {}
+            }
+        },
+        "config": {
+            "fullWidth": true
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.sap.sobeys.i18n.i18n"
+                }
+            },
+            "": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/Orders.json"
+            },
+            "Orders": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/Orders.json"
+            },
+
+            "exceptionsModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/Exceptions.json"
+            },
+            "productModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/Products.json"
+            },
+            "departmentModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/Departments.json"
+            },
+            "vendorModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/Vendors.json"
+            },
+            "itemModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/Items.json"
+            },
+            "contractModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/Contracts.json"
+            },
+            "categoryModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/Categories.json"
+            },
+            "currencyModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/Currency.json"
+            },
+            "supplierModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/Suppliers.json"
+            },
+            "adzonesModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "./model/AdZones.json"
+            }
+        },
+        "resources": {
+            "css": [{
+                "uri": "css/style.css"
+            }]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.f.routing.Router",
+                "viewType": "XML",
+                "viewPath": "com.sap.sobeys.view",
+                "controlId": "flexibleColumnLayout",
+                "transition": "slide",
+                "bypassed": {
+                    "target": "notFound"
+                },
+                "async": true
+            },
+            "routes": [{
+                    "pattern": ":layout:",
+                    "name": "master",
+                    "target": [
+                        "master",
+                        "detail"
+                    ]
+                },
+                {
+                    "pattern": "detail/{contract}/{layout}",
+                    "name": "detail",
+                    "target": [
+                        "master",
+                        "detail"
+                    ]
+                }
+            ],
+            "targets": {
+                "master": {
+                    "viewName": "Master",
+                    "controlAggregation": "beginColumnPages"
+                },
+                "detail": {
+                    "viewName": "Detail",
+                    "controlAggregation": "midColumnPages"
+                },
+                "notFound": {
+                    "viewId": "notFound",
+                    "viewName": "NotFound"
+                }
+            }
+        }
+    },
+    "sap.platform.hcp": {
+        "uri": "webapp",
+        "_version": "1.1.0"
+    }
 }

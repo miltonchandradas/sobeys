@@ -1,8 +1,7 @@
 [{
-	"type": "Warning",
-	"area": "Frozen Foods",
-	"message": "Some warning message",
-	"status": "Warning",
-	"text": "Additional warning text",
-	"expiresOn": "Mar 10, 2021"
+    "type": "9",
+    "message": "<p>The item order quantity exceeds the maximum order quantity due to the dynamic final stock.</p><p>Formula to calculate the dynamic final / high stock: Classification Mean * Weighting factor (see right) </p><p> Formula to calculate the maximum order quantity due to the dynamic final stock: Dynamic final stock – Used presentation stock + Demand for stock period</p>",
+    "reasons": "<p>Very high order quantities could lead to very high stock values due to the occurrence of several simultaneous effects:</p><ul><li>Large logistic units</li><li>Fill-up settings</li><li>Order restrictions</li><li>Minimum stock value is too high</li><li>Positive trend</li><li>Promotions</li><li>Price reductions</li><li>High static presentation stock</li></ul>",
+    "actions": "<ul><li>Cut the order</li><li>Decrease static presentation stock</li><li>Check logistic units</li><li>Check minimum order quantity</li><li>Check minimum stock value</li><li>Check promotion times</li></ul>",
+    "params": "<p>Weighting factors for detecting the dynamic high stock in C_CONFIG:</p><p>Excpt.FinalStockWeight.FS1</p><p>Excpt.FinalStockWeight.FS2</p><p>Excpt.FinalStockWeight.SS1</p><p>Excpt.FinalStockWeight.SS2</p>"
 }]
