@@ -1,35 +1,27 @@
-<mvc:View controllerName="com.sap.sobeys.controller.Detail" xmlns:uxap="sap.uxap" xmlns="sap.m" xmlns:f="sap.f"
-    xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
-    <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false"
-        preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false" useIconTabBar="false" showFooter="true">
+<mvc:View xmlns:uxap="sap.uxap" xmlns="sap.m" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.sobeys.controller.Detail">
+    <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" 
+    preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false" useIconTabBar="false" showFooter="true">
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
-                <uxap:expandedHeading>
+                 <uxap:navigationActions>
+                     <OverflowToolbarButton type="Transparent" icon="sap-icon://nav-back" press=".onHandleClose" tooltip="Return to list" visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+                </uxap:navigationActions>
+               <uxap:expandedHeading>
                     <Title text="{contractModel>vendor}" wrapping="true" class="sapUiSmallMarginEnd"/>
                 </uxap:expandedHeading>
                 <uxap:snappedHeading>
                     <FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
                         <FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
-                            <f:Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="S" displayShape="Square"
-                                class="sapUiTinyMarginEnd"/>
+                            <f:Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="S" displayShape="Square" class="sapUiTinyMarginEnd"/>
                             <Title text="{contractModel>vendor}" wrapping="true"/>
                         </FlexBox>
                     </FlexBox>
                 </uxap:snappedHeading>
-                <uxap:navigationActions>
-                    <OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press=".onHandleFullScreen" tooltip="Enter Full Screen Mode"
-                        visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
-                    <OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press=".onHandleExitFullScreen" tooltip="Exit Full Screen Mode"
-                        visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
-                    <OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press=".onHandleClose" tooltip="Close column"
-                        visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
-                </uxap:navigationActions>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
         <uxap:headerContent>
             <FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
-                <f:Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="L" displayShape="Square"
-                    imageFitType="Contain" class="sapUiTinyMarginEnd"/>
+                <f:Avatar src="{path: 'contractModel>VendorPicUrl', formatter: '.formatter.resolvePath'}" displaySize="L" displayShape="Square" imageFitType="Contain" class="sapUiTinyMarginEnd"/>
                 <VBox justifyContent="Center" class="sapUiSmallMarginEnd">
                     <Label text="Vendor Name"/>
                     <Text text="{contractModel>vendor}"/>
@@ -46,50 +38,103 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <VBox class="sapUiSmallMargin" id="vboxContractDetailsForm">
-                            <form:SimpleForm id="formContractDetails" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="6" labelSpanM="6" labelSpanS="12"
-                                adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
-                                singleContainerFullSize="false" validateFieldGroup=".onValidateDetailsData" editable="true">
+                            <form:SimpleForm id="formContractDetails" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="6" labelSpanM="6" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="false" validateFieldGroup=".onValidateDetailsData" editable="true">
                                 <form:content>
                                     <core:Title text="General Info"/>
-                                    <Label text="Transportation Partner" ></Label>
-                                    <Text text="Yes" ></Text>
-                                    <Label text="VSR # " ></Label>
-                                    <Text text="9894536" ></Text>
-                                    <Label text="Total Weight" ></Label>
-                                    <Text text="1200 KG" ></Text>
-                                    <Label text="Transportation Type" ></Label>
-                                    <Text text="Air" ></Text>
+                                    <Label text="Transportation Partner"/>
+                                    <Text text="Yes"/>
+                                    <Label text="VSR # "/>
+                                    <Text text="9894536"/>
+                                    <Label text="Total Weight"/>
+                                    <Text text="1200 KG"/>
+                                    <Label text="Transportation Type"/>
+                                    <Text text="Air"/>
                                     <Label text="Supplying Location"/>
-                                    <Text text="{contractModel>vendor}"></Text>
+                                    <Text text="{contractModel>vendor}"/>
                                     <Label text="Receiving Location"/>
-                                    <Text text="Warehouse A"></Text>
+                                    <Text text="Warehouse A"/>
                                     <Label text="Purchase Order Item"/>
-                                    <Text text="Ice cream"></Text>
+                                    <Text text="Ice cream"/>
                                     <core:Title text="Change Information"/>
                                     <Label text="Last Changed By"/>
-                                    <Text text="CIMC2"></Text>
+                                    <Text text="CIMC2"/>
                                     <Label text="Changed Reason"/>
-                                    <Text text="Minimum threshold"></Text>
+                                    <Text text="Minimum threshold"/>
                                     <!--<Input fieldGroupIds="detailsData"/>-->
                                     <core:Title text="Date Info"/>
                                     <Label text="Created On"/>
-                                    <Text text="Mar 3, 2021"></Text>
+                                    <Text text="Mar 3, 2021"/>
                                     <Label text="Changed On"/>
-                                    <Text text="Mar 3, 2021"></Text>
+                                    <Text text="Mar 3, 2021"/>
                                     <Label text="Delivery Date"/>
-                                    <Text text="Mar 3, 2021"></Text>
+                                    <Text text="Mar 3, 2021"/>
                                     <Label text="Order Date"/>
-                                    <Text text="Feb 4, 2021"></Text>
+                                    <Text text="Feb 4, 2021"/>
                                     <core:Title text="Recent Order History"/>
                                     <Label text="Mar 3, 2021"/>
-                                    <Text text="6 BOXES"></Text>
-                                    <Label text="Total cost of PO" ></Label>
-                                    <Text text="689.12 CAD" ></Text>
+                                    <Text text="6 BOXES"/>
+                                    <Label text="Total cost of PO"/>
+                                    <Text text="689.12 CAD"/>
    
                                     <Label text="April 21, 2021"/>
-                                    <Text text="20 BOXES"></Text>
+                                    <Text text="20 BOXES"/>
                                     <Label text="May 4, 2021"/>
-                                    <Text text="22 BOXES"></Text>
+                                    <Text text="22 BOXES"/>
+                                </form:content>
+                            </form:SimpleForm>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection id="inventoryLevelSection" title="Inventory Level (Stock on Hand)">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox class="sapUiSmallMargin" id="vboxILevelForm">
+                            <form:SimpleForm id="formILevel" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="6" labelSpanM="6" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="false" validateFieldGroup=".onValidateDetailsData" editable="true">
+                                <form:content>
+                                    <core:Title text="Stores"/>
+                                    <Label text="Store A"/>
+                                    <Text text="10"/>
+                                    <Label text="Store B"/>
+                                    <Text text="3"/>
+                                    <Label text="Store C"/>
+                                    <Text text="5"/>
+                                    <Label text="Store D"/>
+                                    <Text text="9"/>
+                                    <Label text="Store E"/>
+                                    <Text text="1"/>
+                                    <core:Title text="Warehouses"/>
+                                    <Label text="Warehouse A"/>
+                                    <Text text="50"/>
+                                    <Label text="Warehouse B"/>
+                                    <Text text="25"/>
+                                    <core:Title text="Safety Stock"/>
+                                    <Label text="Stock Level"/>
+                                    <Text text="10"/>
+                                    <!--<Input fieldGroupIds="detailsData"/>-->
+                                </form:content>
+                            </form:SimpleForm>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+              <uxap:ObjectPageSection id="assetLevelSection" title="Asset Details">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox class="sapUiSmallMargin" id="vboxALLevelForm">
+                            <form:SimpleForm id="formALLevel" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="6" labelSpanM="6" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="false" validateFieldGroup=".onValidateDetailsData" editable="true">
+                                <form:content>
+                                    <core:Title text="Shrinkage"/>
+                                    <Label text="Per Date"/>
+                                    <Text text="10 %"/>
+  
+                                    <core:Title text="Purge"/>
+                                    <Label text="Quantity"/>
+                                    <Text text="5 units"/>
+                                    <core:Title text="Minimum Order Quantity"/>
+                                    <Label text="Quantity"/>
+                                    <Text text="15 units"/>
+                                    <!--<Input fieldGroupIds="detailsData"/>-->
                                 </form:content>
                             </form:SimpleForm>
                         </VBox>
@@ -105,7 +150,7 @@
                                     <headerToolbar>
                                         <OverflowToolbar>
                                             <content>
-                                                <Title text="Exceptions (1)" level="H2"/>
+                                                <Title text="Exceptions (2)" level="H2"/>
                                             </content>
                                         </OverflowToolbar>
                                     </headerToolbar>
@@ -130,7 +175,7 @@
                                     <items>
                                         <ColumnListItem>
                                             <cells>
-                                                <ObjectIdentifier title="9"/>
+                                                <ObjectIdentifier title="{exceptionsModel>type}"/>
                                                 <FormattedText htmlText="{exceptionsModel>message}"/>
                                                 <FormattedText htmlText="{exceptionsModel>reasons}"/>
                                                 <FormattedText htmlText="{exceptionsModel>actions}"/>
@@ -148,23 +193,21 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <VBox class="sapUiSmallMargin" id="vboxContractDetailsForm2">
-                            <form:SimpleForm id="formContractDetails2" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="6" labelSpanM="6" labelSpanS="12"
-                                adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
-                                singleContainerFullSize="false" validateFieldGroup=".onValidateDetailsData">
+                            <form:SimpleForm id="formContractDetails2" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="6" labelSpanM="6" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="false" validateFieldGroup=".onValidateDetailsData">
                                 <form:content>
                                     <core:Title text="Stock Info"/>
                                     <Label text="Current Stock"/>
-                                    <Text text="10"></Text>
+                                    <Text text="10"/>
                                     <Label text="Cases Proposed"/>
-                                    <Input value="50" type="Number" ></Input>
+                                    <Input value="50" type="Number"/>
                                     <Label text="Articles Proposed"/>
-                                    <Text text="850" ></Text>
+                                    <Text text="850"/>
                                     <Label text="Total Weight"/>
-                                    <Text text="180 KG" ></Text>
+                                    <Text text="180 KG"/>
                                     <!--<Input fieldGroupIds="detailsData"/>-->
                                     <core:Title text="Cost Info"/>
                                     <Label text="Sales Price"/>
-                                    <Text text="20 CAD"></Text>
+                                    <Text text="20 CAD"/>
                                     <Label text="Net Amount"/>
                                     <Text text="{contractModel>NetAmount} CAD"/>
                              </form:content>

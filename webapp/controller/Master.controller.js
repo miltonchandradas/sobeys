@@ -10,6 +10,7 @@ sap.ui.define([
     return BaseController.extend("com.sap.sobeys.controller.Master", {
 
         formatter: formatter,
+        afinalFilter: [],
 
         onInit: function() {
             this._view = this.getView();
@@ -39,7 +40,137 @@ sap.ui.define([
 
         },
 
+        onBeforeRebindTable: function(oEvent) {
+            var mBindingParams = oEvent.getParameter("bindingParams");
+            if (this.afinalFilter.length > 0) {
+                mBindingParams.filters.push(this.afinalFilter);
+            }
+        },
         // SAPUI5 Control Events
+
+
+        getTable: function() {
+            return this.getView().byId("poTable").getTable();
+        },
+        getTableItems: function() {
+            return this.getTable().getBinding("items");
+        },
+
+        onFilterChange: function(oEvent) {
+            var aQuery = ["Departent", "Calculated", "Supplier", "SupplierName", "SupplyLocation", "Store", "ReceivingLocation",
+                "VSRNumber", "BuyerNumber", "ArticleNumber", "RetailUnits", "Cases", "OrderDate", "ShipDate", "DeliveryDate", "TransportationPartner",
+                "Exception", "ExceptionLevel", "Status", "TempZone", "VendorLeadTime", "Item", "ItemDescription", "Variant", "OrdUnitQty", "Pack",
+                "OrdQty", "OrderReach", "Weight", "ListPrice", "DiscountAmt", "DiscountType", "OrderPrice", "NetAmount", "SKUID", "Currency",
+                "TI", "HI", "UPC", "Recost", "PurgeQty", "Shrinkage"
+            ];
+
+            if (oEvent.getParameters().refreshButtonPressed) {
+                this.onRefresh();
+            } else {
+                this.afinalFilter = [];
+                var aTaskFilter = [];
+                for (var i = 0; i < aQuery.length; i++) {
+                    var obj = this.byId(aQuery[i]);
+                    if (obj) {
+                        if (obj.getSelectedKeys) {
+                            var sQuery = obj.getSelectedKeys();
+                            if (sQuery) {
+
+                                var orFilter = [];
+                                for (var j = 0; j < sQuery.length; j++) {
+                                    orFilter.push(new sap.ui.model.Filter({
+                                        path: aQuery[i],
+                                        operator: sap.ui.model.FilterOperator.EQ,
+                                        value1: sQuery[j]
+                                    }));
+                                }
+                                if (orFilter.length > 0) {
+                                    aTaskFilter.push(new sap.ui.model.Filter(orFilter, false));
+                                }
+                            }
+
+                        } else if (obj.getDateValue) {
+                            var qdate = obj.getDateValue();
+                            if (qdate) {
+                                qdate.setMilliseconds(0);
+                                qdate.setSeconds(0);
+                                qdate.setMinutes(0);
+                                qdate.setHours(0);
+
+                                // Set second date as end of day
+                                var dDateEnd = obj.getDateValue();
+                                dDateEnd.setMilliseconds(0);
+                                dDateEnd.setSeconds(59);
+                                dDateEnd.setMinutes(59);
+                                dDateEnd.setHours(23);
+
+                                aTaskFilter.push(new sap.ui.model.Filter({
+                                    path: aQuery[i],
+                                    operator: sap.ui.model.FilterOperator.BT,
+                                    value1: qdate,
+                                    value2: dDateEnd
+                                }));
+
+                            }
+                        }
+                    }
+                }
+                this.afinalFilter.push(new sap.ui.model.Filter(aTaskFilter, true));
+                // this.byId("poTable").fireBeforeRebindTable();
+                //var mBindingParams = this.byId("poTable").mBindingParams;
+                var test = this.getTable().getBinding("items");
+
+                if (this.afinalFilter.length > 0) {
+                    // test.aFilters = this.afinalFilter;
+                    test.filter(this.afinalFilter);
+                    test.applyFilter();
+                    // test.aApplicationFilters = this.afinalFilter;
+                    test.refresh(true);
+                    //mBindingParams.filters.push(this.afinalFilter);
+                }
+            }
+
+
+        },
+
+        dateToYMD: function(date) {
+            var strArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var d = date.getDate();
+            var m = strArray[date.getMonth()];
+            var y = date.getFullYear();
+            return '' +
+                m + ' ' + d + ', ' + y;
+        },
+        getSelect: function(sId) {
+            return this.getView().byId(sId);
+        },
+
+        getSelectedItemText: function(oSelect) {
+            return oSelect.getSelectedItem() ? oSelect.getSelectedItem().getKey() : "";
+
+        },
+
+        filterTable: function(aCurrentFilterValues) {
+            this.getTableItems().filter(aCurrentFilterValues);
+        },
+
+        getFilters: function(aCurrentFilterValues) {
+            this.aFilters = [];
+
+            this.aFilters = this.aKeys.map(function(sCriteria, i) {
+                return new Filter(sCriteria, sap.ui.model.FilterOperator.Contains, aCurrentFilterValues[i]);
+            });
+
+            return this.aFilters;
+        },
+
+        getFilterCriteria: function(aCurrentFilterValues) {
+            return this.aKeys.filter(function(el, i) {
+                if (aCurrentFilterValues[i] !== "") {
+                    return el;
+                }
+            });
+        },
 
         // Dynamic Page Content - Table
         // User selects a row
@@ -58,13 +189,13 @@ sap.ui.define([
             var contractPath = oEvent.getSource().getBindingContextPath().replace("/", "");
             var oNextUIState;
 
-            this.getOwnerComponent().getHelper().then(function(oHelper) {
-                oNextUIState = oHelper.getNextUIState(1);
-                this._router.navTo("detail", {
-                    "layout": oNextUIState.layout,
-                    "contract": contractPath
-                });
-            }.bind(this));
+            //    this.getOwnerComponent().getHelper().then(function(oHelper) {
+            // oNextUIState = oHelper.getNextUIState(0);
+            this._router.navTo("detail", {
+                "layout": 0, //oNextUIState.layout,
+                "contract": contractPath
+            });
+            //  }.bind(this));
         },
 
         // Dynamic Page Content - Table
@@ -161,16 +292,37 @@ sap.ui.define([
         },
 
 
-        onValueHelpRequested: function() {
+        onValueHelpRequested: function(oEvent) {
+            var eventid = oEvent.getParameter("id");
+            this._oMultiInput = this.byId(eventid);
             this._oValueHelpDialog = sap.ui.xmlfragment("com.sap.sobeys.fragments.BuyingUnitsValueHelp", this);
             this.getView().addDependent(this._oValueHelpDialog);
-            this._oValueHelpDialog.setRangeKeyFields([{
-                label: "Unit",
-                key: "Cases",
-                type: "number"
+            if (eventid.includes("OrdQty")) {
+                this._oValueHelpDialog.setTitle("Buying Units");
+                this._oValueHelpDialog.setRangeKeyFields([{
+                    label: "Unit",
+                    key: "Cases",
+                    type: "number"
 
-            }]);
+                }]);
+            } else if (eventid.includes("Buyer")) {
+                this._oValueHelpDialog.setTitle("Buyer #");
+                this._oValueHelpDialog.setRangeKeyFields([{
+                    label: "Buyer #",
+                    key: "BuyerNumber",
+                    type: "number"
 
+                }]);
+            } else if (eventid.includes("Article")) {
+                this._oValueHelpDialog.setTitle("Article #");
+
+                this._oValueHelpDialog.setRangeKeyFields([{
+                    label: "Article #",
+                    key: "ArticleNumber",
+                    type: "number"
+
+                }]);
+            }
             this._oValueHelpDialog.setTokens(this._oMultiInput.getTokens());
             this._oValueHelpDialog.open();
         },

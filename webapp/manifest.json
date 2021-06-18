@@ -129,7 +129,8 @@
                 "routerClass": "sap.f.routing.Router",
                 "viewType": "XML",
                 "viewPath": "com.sap.sobeys.view",
-                "controlId": "flexibleColumnLayout",
+                "controlId": "app",
+                "controlAggregation": "pages",
                 "transition": "slide",
                 "bypassed": {
                     "target": "notFound"
@@ -140,8 +141,7 @@
                     "pattern": ":layout:",
                     "name": "master",
                     "target": [
-                        "master",
-                        "detail"
+                        "master"
                     ]
                 },
                 {
@@ -156,11 +156,13 @@
             "targets": {
                 "master": {
                     "viewName": "Master",
-                    "controlAggregation": "beginColumnPages"
+                    "viewId": "master",
+                    "viewLevel": 1
                 },
                 "detail": {
                     "viewName": "Detail",
-                    "controlAggregation": "midColumnPages"
+                    "viewId": "detail",
+                    "viewLevel": 2
                 },
                 "notFound": {
                     "viewId": "notFound",

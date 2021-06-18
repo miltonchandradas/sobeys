@@ -22,27 +22,33 @@
          </v:VariantManagement>
  			<fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="true">
 					<fb:filterGroupItems>
-						<fb:FilterGroupItem name="A" groupName="A" label="Department" visibleInFilterBar="true">
+                    	<fb:FilterGroupItem name="calcDateFilterItem" groupName="basicFilter" label="Calculation Date" visibleInFilterBar="true">
 							<fb:control>
-								<ComboBox id="slDepartment" showSecondaryValues="true" items="{ path: 'departmentModel>/' }">
+								<DatePicker id="Calculated" change="onFilterChange"/>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem name="A" groupName="basicFilter" label="Department" visibleInFilterBar="true">
+							<fb:control>
+								<ComboBox id="Department" showSecondaryValues="true" items="{ path: 'departmentModel>/' }">
 									<core:ListItem key="{departmentModel>id}" text="{departmentModel>name}" additionalText="{departmentModel>id}"/>
 								</ComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
-						<fb:FilterGroupItem name="filterItem1" groupName="basicFilter" label="Receiving Location" visibleInFilterBar="true">
+						<fb:FilterGroupItem name="filterItem1" groupName="basicFilter" label="CFC" visibleInFilterBar="true">
 							<fb:control>
-								<MultiComboBox selectionChange=".onFilterChange" showSecondaryValues="true" required="true">
-									<core:ListItem key="000001" text="Warehouse A" additionalText="1"/>
-									<core:ListItem key="000002" text="Warehouse B" additionalText="2"/>
-									<core:ListItem key="000003" text="Warehouse C" additionalText="3"/>
-									<core:ListItem key="000004" text="Warehouse D" additionalText="4"/>
-									<core:ListItem key="000005" text="Warehouse E" additionalText="5"/>
+								<MultiComboBox id="ReceivingLocation" selectionChange=".onFilterChange" showSecondaryValues="true" required="false"
+                                	>
+                                    <core:ListItem key="Warehouse A" text="Warehouse A" additionalText="1"/>
+                                    <core:ListItem key="Warehouse B" text="Warehouse B" additionalText="2"/>
+                                    <core:ListItem key="Warehouse C" text="Warehouse C" additionalText="3"/>
+                                    <core:ListItem key="Warehouse D" text="Warehouse D" additionalText="4"/>
+                                    <core:ListItem key="Warehouse E" text="Warehouse E" additionalText="5"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem2" groupName="basicFilter" label="Supplying Location" visibleInFilterBar="false">
 							<fb:control>
-								<MultiComboBox selectedKeys="000001,000003,000005" selectionChange=".onFilterChange" showSecondaryValues="true">
+								<MultiComboBox id="SupplyLocation" selectionChange=".onFilterChange" showSecondaryValues="true">
 								    <core:ListItem key="000001" text="Toronto" additionalText="1"/>
 									<core:ListItem key="000002" text="Montreal" additionalText="2"/>
 									<core:ListItem key="000003" text="Ottawa" additionalText="3"/>
@@ -54,7 +60,7 @@
                         <fb:FilterGroupItem  name="testBU" groupName="basicFilter" label="Buying Unit" visibleInFilterBar="true">
                             <fb:control>
                             	<MultiInput
-						            id="multiInput"
+						            id="OrdQty"
 						            valueHelpOnly="true"
 					            	valueHelpRequest=".onValueHelpRequested"
 					            />
@@ -63,17 +69,17 @@
                         </fb:FilterGroupItem>
 						<fb:FilterGroupItem name="dateFilterItem1" groupName="basicFilter" label="Order Date" visibleInFilterBar="true">
 							<fb:control>
-								<DatePicker value="{path: 'dateModel>/OrderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
+								<DatePicker id="OrderDate" value="{path: 'dateModel>/OrderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="dateFilterItem2" groupName="basicFilter" label="Delivery Date" visibleInFilterBar="true">
 							<fb:control>
-								<DatePicker value="{path: 'dateModel>/DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
+								<DatePicker id="DeliveryDate" value="{path: 'dateModel>/DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem3" groupName="basicFilter" label="Status" visibleInFilterBar="true">
 							<fb:control>
-								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
+								<MultiComboBox id="statsel" selectionChange=".onFilterChange" showSecondaryValues="true">
 									<core:ListItem key="101" text="Ready"/>
 									<core:ListItem key="102" text="Review"/>
 									<core:ListItem key="103" text="Urgent Review"/>
@@ -82,7 +88,7 @@
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem4" groupName="basicFilter" label="Exceptions" visibleInFilterBar="true">
 							<fb:control>
-								<MultiComboBox selectedKeys="101,102" selectionChange=".onFilterChange" showSecondaryValues="true">
+								<MultiComboBox id="excep" selectionChange=".onFilterChange" showSecondaryValues="true">
 									<core:ListItem key="101" text="Neutral" additionalText="101"/>
 									<core:ListItem key="102" text="Warning" additionalText="102"/>
 								</MultiComboBox>
@@ -90,82 +96,72 @@
 						</fb:FilterGroupItem>
                         <fb:FilterGroupItem name="filterItem5" groupName="basicFilter" label="Temp Zone" visibleInFilterBar="false">
 							<fb:control>
-								<MultiComboBox selectionChange=".onFilterChange" showSecondaryValues="false">
-									<core:ListItem key="101" text="Normal"/>
-									<core:ListItem key="102" text="Refrigerated"/>
-									<core:ListItem key="103" text="Frozen"/>
+								<MultiComboBox id="TempZone" selectionChange=".onFilterChange" showSecondaryValues="false">
+									<core:ListItem key="Normal" text="Normal"/>
+									<core:ListItem key="Refrigerated" text="Refrigerated"/>
+									<core:ListItem key="Frozen" text="Frozen"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem6" groupName="basicFilter" label="Supplier Number" visibleInFilterBar="false">
 							<fb:control>
-								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
-									<core:ListItem key="101" text="000001"/>
-									<core:ListItem key="102" text="000002"/>
-									<core:ListItem key="103" text="000003"/>
-									<core:ListItem key="103" text="000004"/>
-									<core:ListItem key="103" text="000005"/>
+								<MultiComboBox id="Supplier" selectionChange=".onFilterChange" showSecondaryValues="true">
+									<core:ListItem key="000001" text="000001"/>
+									<core:ListItem key="000002" text="000002"/>
+									<core:ListItem key="000003" text="000003"/>
+									<core:ListItem key="000004" text="000004"/>
+									<core:ListItem key="000005" text="000005"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem7" groupName="basicFilter" label="Supplier Name" visibleInFilterBar="false">
 							<fb:control>
-								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
-									<core:ListItem key="101" text="Supplier A"/>
-									<core:ListItem key="102" text="Supplier B"/>
-									<core:ListItem key="103" text="Supplier C"/>
-									<core:ListItem key="103" text="Supplier D"/>
-									<core:ListItem key="103" text="Supplier E"/>
+								<MultiComboBox id="SupplierName" selectionChange=".onFilterChange" showSecondaryValues="true">
+									<core:ListItem key="Supplier A" text="Supplier A"/>
+									<core:ListItem key="Supplier B" text="Supplier B"/>
+									<core:ListItem key="Supplier C" text="Supplier C"/>
+									<core:ListItem key="Supplier D" text="Supplier D"/>
+									<core:ListItem key="Supplier E" text="Supplier E"/>
 								</MultiComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem8" groupName="basicFilter" label="VSR #" visibleInFilterBar="false">
 							<fb:control>
-								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
-									<core:ListItem key="101" text="Supplier A"/>
-									<core:ListItem key="102" text="Supplier B"/>
-									<core:ListItem key="103" text="Supplier C"/>
-									<core:ListItem key="103" text="Supplier D"/>
-									<core:ListItem key="103" text="Supplier E"/>
-								</MultiComboBox>
+								
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem9" groupName="basicFilter" label="Buyer #" visibleInFilterBar="false">
 							<fb:control>
-								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
-									<core:ListItem key="101" text="Buyer A"/>
-									<core:ListItem key="102" text="Buyer B"/>
-									<core:ListItem key="103" text="Buyer C"/>
-									<core:ListItem key="103" text="Buyer D"/>
-									<core:ListItem key="103" text="Buyer E"/>
-								</MultiComboBox>
+								<MultiInput
+						            id="BuyerNumber"
+						            valueHelpOnly="true"
+					            	valueHelpRequest=".onValueHelpRequested"
+					            />
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem10" groupName="basicFilter" label="Article #" visibleInFilterBar="false">
 							<fb:control>
-								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="false">
-									<core:ListItem key="101" text="Supplier A"/>
-									<core:ListItem key="102" text="Supplier B"/>
-									<core:ListItem key="103" text="Supplier C"/>
-									<core:ListItem key="103" text="Supplier D"/>
-									<core:ListItem key="103" text="Supplier E"/>
-								</MultiComboBox>
+								<MultiInput
+						            id="ArticleNumber"
+						            valueHelpOnly="true"
+					            	valueHelpRequest=".onValueHelpRequested"
+					            />
 							</fb:control>
 						</fb:FilterGroupItem>
                         <fb:FilterGroupItem name="dateFilterItem3" groupName="basicFilter" label="Ship Date" visibleInFilterBar="false">
 							<fb:control>
-								<DatePicker value="{path: 'dateModel>/ShipDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
+								<DatePicker id="ShipDate" value="{path: 'dateModel>/ShipDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
 							</fb:control>
 						</fb:FilterGroupItem>
                        <fb:FilterGroupItem name="dateFilterItem4" groupName="basicFilter" label="Forcasting Period" visibleInFilterBar="false">
 							<fb:control>
-								<DateRangeSelection displayFormat="dd/MM/yyyy"/>
+								<DateRangeSelection id="OrderReach" displayFormat="dd/MM/yyyy"/>
 							</fb:control>
 						</fb:FilterGroupItem>
 
 						<fb:FilterGroupItem name="filterItem11" groupName="basicFilter" label="Transportation Partner" visibleInFilterBar="false">
 							<fb:control>
-								<MultiComboBox selectedKeys="101" selectionChange=".onFilterChange" showSecondaryValues="true">
+								<MultiComboBox id="TransportationPartner" selectionChange=".onFilterChange" showSecondaryValues="true">
 									<core:ListItem key="101" text="True"/>
 									<core:ListItem key="102" text="False"/>
 								</MultiComboBox>
@@ -173,7 +169,7 @@
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem12" groupName="basicFilter" label="Vendor Lead Time" visibleInFilterBar="false">
 							<fb:control>
-	                        	<Input id="inputNumber" type="Number" class="sapUiSmallMarginBottom"/>
+	                        	<Input id="VendorLeadTime" type="Number" class="sapUiSmallMarginBottom"/>
 							</fb:control>
 						</fb:FilterGroupItem>
 
@@ -186,6 +182,7 @@
  
 			<VBox fitContainer="true">
           	<smartTable:SmartTable id="poTable" entitySet="/" smartFilterId="smartFilterBar" useExportToExcel="true"  
+              beforeRebindTable="onBeforeRebindTable"
               useTablePersonalisation="true" header="Proposed Orders" showRowCount="true" persistencyKey="ST_Explored" 
               enableAutoBinding="true" editTogglable="false" app:useSmartToggle="true" demandPopin="true" 
                editable="true"  tableType="ResponsiveTable" useVariantManagement="false" class="sapUiNoContentPadding">
@@ -205,7 +202,7 @@
                         <ToolbarSpacer width="20px"/>
                         <OverflowToolbarButton icon="sap-icon://delete" tooltip="Delete Line" text="Delete Item" press="onDeleteOrder"/>
                         <OverflowToolbarButton icon="sap-icon://add" tooltip="Add Line" text="Add Item" press="onAddOrder"/>
-                        <OverflowToolbarButton icon="sap-icon://sales-order" tooltip="Create PO" text="Create PO" press="onApproveOrder"/>
+                        <Button icon="sap-icon://sales-order" tooltip="Create PO" text="Create PO" press="onApproveOrder" type="Emphasized"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <Table sticky="ColumnHeaders,HeaderToolbar,InfoToolbar">
@@ -216,7 +213,13 @@
 					        </customData>
 							<Text text=""/>
 						</Column>
-    					<Column visible="false">
+    					<Column visible="true">
+                            <customData>
+						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Calculated&quot;,  &quot;leadingProperty&quot;: &quot;Calculated&quot;, &quot;sortProperty&quot;: &quot;Calculated&quot;, &quot;additionalProperty&quot;: &quot;Calculated&quot;, &quot;description&quot;: &quot;Calculated&quot;}"/>
+					        </customData>
+							<Text text="Calculation Date"/>
+						</Column>
+  					<Column visible="false">
                             <customData>
 						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Department&quot;,  &quot;leadingProperty&quot;: &quot;Department&quot;, &quot;sortProperty&quot;: &quot;Department&quot;, &quot;additionalProperty&quot;: &quot;Department&quot;, &quot;description&quot;: &quot;Department&quot;}"/>
 					        </customData>
@@ -422,7 +425,8 @@
                                     <CheckBox/>
                                     <Button icon="sap-icon://copy" enabled="true" press=".onApproveContractPress"/>
                                 </HBox>
-                                <ObjectIdentifier title="{Department}"/>
+                                <ObjectIdentifier title="{path: 'Calculated', type: 'sap.ui.model.type.Date', formatOptions: { source: {pattern: 'MM/dd/yyyy'}, style: 'medium', UTC: true } }"/>
+	                            <ObjectIdentifier title="{Department}"/>
 								<ComboBox value="{SupplierName}" change="onSubmitDialogPress" showSecondaryValues= "true">
                                     <core:ListItem key="000001" text="Supplier A" additionalText="000001"/>
                                     <core:ListItem key="000002" text="Supplier B" additionalText="000002"/>
