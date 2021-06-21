@@ -60,7 +60,9 @@
                         <fb:FilterGroupItem  name="testBU" groupName="basicFilter" label="Buying Unit" visibleInFilterBar="true">
                             <fb:control>
                             	<MultiInput
-						            id="OrdQty"
+						            id="Cases"
+                                    maxTokens="3"
+                                    tokenChange=".onFilterChange"
 						            valueHelpOnly="true"
 					            	valueHelpRequest=".onValueHelpRequested"
 					            />
@@ -69,12 +71,12 @@
                         </fb:FilterGroupItem>
 						<fb:FilterGroupItem name="dateFilterItem1" groupName="basicFilter" label="Order Date" visibleInFilterBar="true">
 							<fb:control>
-								<DatePicker id="OrderDate" value="{path: 'dateModel>/OrderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
+								<DatePicker id="OrderDate"  change="onFilterChange" value="{path: 'dateModel>/OrderDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="dateFilterItem2" groupName="basicFilter" label="Delivery Date" visibleInFilterBar="true">
 							<fb:control>
-								<DatePicker id="DeliveryDate" value="{path: 'dateModel>/DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
+								<DatePicker id="DeliveryDate"  change="onFilterChange" value="{path: 'dateModel>/DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true } }"/>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem name="filterItem3" groupName="basicFilter" label="Status" visibleInFilterBar="true">
@@ -134,6 +136,8 @@
 							<fb:control>
 								<MultiInput
 						            id="BuyerNumber"
+                                    maxTokens="3"
+                                     tokenUpdate=".onFilterChange"
 						            valueHelpOnly="true"
 					            	valueHelpRequest=".onValueHelpRequested"
 					            />
@@ -143,6 +147,8 @@
 							<fb:control>
 								<MultiInput
 						            id="ArticleNumber"
+                                    maxTokens="3"
+                                     tokenUpdate=".onFilterChange"
 						            valueHelpOnly="true"
 					            	valueHelpRequest=".onValueHelpRequested"
 					            />

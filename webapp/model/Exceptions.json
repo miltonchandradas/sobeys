@@ -4,4 +4,10 @@
     "reasons": "<p>Very high order quantities could lead to very high stock values due to the occurrence of several simultaneous effects:</p><ul><li>Large logistic units</li><li>Fill-up settings</li><li>Order restrictions</li><li>Minimum stock value is too high</li><li>Positive trend</li><li>Promotions</li><li>Price reductions</li><li>High static presentation stock</li></ul>",
     "actions": "<ul><li>Cut the order</li><li>Decrease static presentation stock</li><li>Check logistic units</li><li>Check minimum order quantity</li><li>Check minimum stock value</li><li>Check promotion times</li></ul>",
     "params": "<p>Weighting factors for detecting the dynamic high stock in C_CONFIG:</p><p>Excpt.FinalStockWeight.FS1</p><p>Excpt.FinalStockWeight.FS2</p><p>Excpt.FinalStockWeight.SS1</p><p>Excpt.FinalStockWeight.SS2</p>"
+}, {
+    "type": "25",
+    "message": "<p>According to the forecast calculation the stock of the item will fall to zero before the point of availability of the current order</p>",
+    "reasons": "<p>Current stock is low and availability time from vendor will not replenish before reaching zero</p>",
+    "actions": "<ul><li>Cut the order</li><li>Decrease static presentation stock</li><li>Check logistic units</li><li>Check minimum order quantity</li><li>Check minimum stock value</li><li>Check promotion times</li></ul>",
+    "params": "<p></p><p></p>"
 }]

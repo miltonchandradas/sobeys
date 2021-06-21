@@ -72,7 +72,7 @@ sap.ui.define([
                 for (var i = 0; i < aQuery.length; i++) {
                     var obj = this.byId(aQuery[i]);
                     if (obj) {
-                        if (obj.getSelectedKeys) {
+                        if (obj.getSelectedKeys) { //MultiSelect
                             var sQuery = obj.getSelectedKeys();
                             if (sQuery) {
 
@@ -84,12 +84,30 @@ sap.ui.define([
                                         value1: sQuery[j]
                                     }));
                                 }
+
                                 if (orFilter.length > 0) {
                                     aTaskFilter.push(new sap.ui.model.Filter(orFilter, false));
                                 }
                             }
 
-                        } else if (obj.getDateValue) {
+
+                        } else if (obj.getTokens) { //Multi Input
+                            var sTokens = obj.getTokens();
+                            if (sTokens) {
+                                var orFilter = [];
+                                for (var j = 0; j < sTokens.length; j++) {
+                                    orFilter.push(new sap.ui.model.Filter({
+                                        path: aQuery[i],
+                                        operator: sap.ui.model.FilterOperator[sTokens[j].data("range").operation],
+                                        value1: sTokens[j].data("range").value1,
+                                        value2: sTokens[j].data("range").value2
+                                    }));
+                                }
+                                if (orFilter.length > 0) {
+                                    aTaskFilter.push(new sap.ui.model.Filter(orFilter, false));
+                                }
+                            }
+                        } else if (obj.getDateValue) { //Date
                             var qdate = obj.getDateValue();
                             if (qdate) {
                                 qdate.setMilliseconds(0);
@@ -98,17 +116,21 @@ sap.ui.define([
                                 qdate.setHours(0);
 
                                 // Set second date as end of day
-                                var dDateEnd = obj.getDateValue();
+                                var dDateEnd = new Date(qdate);
                                 dDateEnd.setMilliseconds(0);
                                 dDateEnd.setSeconds(59);
                                 dDateEnd.setMinutes(59);
                                 dDateEnd.setHours(23);
 
+                                var dStr = "";
+                                if (aQuery[i] !== "Calculated") {
+                                    if (qdate.getMonth() < 9) dStr += "0";
+                                }
+                                dStr += (qdate.getMonth() + 1) + "/" + qdate.getDate() + "/" + qdate.getFullYear();
                                 aTaskFilter.push(new sap.ui.model.Filter({
                                     path: aQuery[i],
-                                    operator: sap.ui.model.FilterOperator.BT,
-                                    value1: qdate,
-                                    value2: dDateEnd
+                                    operator: sap.ui.model.FilterOperator.EQ,
+                                    value1: dStr
                                 }));
 
                             }
@@ -297,7 +319,7 @@ sap.ui.define([
             this._oMultiInput = this.byId(eventid);
             this._oValueHelpDialog = sap.ui.xmlfragment("com.sap.sobeys.fragments.BuyingUnitsValueHelp", this);
             this.getView().addDependent(this._oValueHelpDialog);
-            if (eventid.includes("OrdQty")) {
+            if (eventid.includes("Cases")) {
                 this._oValueHelpDialog.setTitle("Buying Units");
                 this._oValueHelpDialog.setRangeKeyFields([{
                     label: "Unit",
@@ -331,6 +353,7 @@ sap.ui.define([
             var aTokens = oEvent.getParameter("tokens");
             this._oMultiInput.setTokens(aTokens);
             this._oValueHelpDialog.close();
+            this.onFilterChange(oEvent);
         },
 
         onValueHelpCancelPress: function() {
