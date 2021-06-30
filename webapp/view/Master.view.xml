@@ -62,11 +62,10 @@
                             	<MultiInput
 						            id="Cases"
                                     maxTokens="3"
-                                    tokenChange=".onFilterChange"
+                                    tokenUpdate=".onFilterChange"
 						            valueHelpOnly="true"
 					            	valueHelpRequest=".onValueHelpRequested"
 					            />
-
                             </fb:control>
                         </fb:FilterGroupItem>
 						<fb:FilterGroupItem name="dateFilterItem1" groupName="basicFilter" label="Order Date" visibleInFilterBar="true">
@@ -191,7 +190,7 @@
               beforeRebindTable="onBeforeRebindTable"
               useTablePersonalisation="true" header="Proposed Orders" showRowCount="true" persistencyKey="ST_Explored" 
               enableAutoBinding="true" editTogglable="false" app:useSmartToggle="true" demandPopin="true" 
-               editable="true"  tableType="ResponsiveTable" useVariantManagement="false" class="sapUiNoContentPadding">
+               editable="true"  tableType="Table" useVariantManagement="false" class="sapUiNoContentPadding">
                 <smartTable:customToolbar>
                     <OverflowToolbar>
                         <ToolbarSpacer/>
@@ -211,9 +210,9 @@
                         <Button icon="sap-icon://sales-order" tooltip="Create PO" text="Create PO" press="onApproveOrder" type="Emphasized"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
-                <Table sticky="ColumnHeaders,HeaderToolbar,InfoToolbar">
+                <Table sticky="ColumnHeaders,HeaderToolbar,InfoToolbar" fixedLayout="false" >
 				<columns>
-						<Column>
+						<Column >
                            <customData>
 						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Check&quot;}"/>
 					        </customData>
@@ -261,17 +260,11 @@
 					        </customData>
 							<Text text="Buyer #"/>
 						</Column>
-                        <Column minScreenWidth="Desktop">
-                          <customData>
-						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;ArticleNumber&quot;,  &quot;leadingProperty&quot;: &quot;ArticleNumber&quot;, &quot;sortProperty&quot;: &quot;ArticleNumber&quot;, &quot;additionalProperty&quot;: &quot;ArticleNumber&quot;, &quot;description&quot;: &quot;ArticleNumber&quot;}"/>
-					        </customData>
-                            <Text text="Article #"/>
-                        </Column>
     					<Column minScreenWidth="Desktop" hAlign="Center">
                           <customData>
 						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Item&quot;,  &quot;leadingProperty&quot;: &quot;Item&quot;, &quot;sortProperty&quot;: &quot;Item&quot;, &quot;additionalProperty&quot;: &quot;Item&quot;, &quot;description&quot;: &quot;Item&quot;}"/>
 					        </customData>
-							<Text text="Item"/>
+							<Text text="Article"/>
 						</Column>
 	                    
 						<Column minScreenWidth="Desktop" hAlign="Center">
@@ -341,7 +334,7 @@
 					        </customData>
 							<Text text="Vendor Lead Time"/>
 						</Column>
-   				     	<Column visible="false">
+   				     	<Column visible="true">
                             <customData>
 						        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;PONumber&quot;,  &quot;leadingProperty&quot;: &quot;PONumber&quot;, &quot;sortProperty&quot;: &quot;PONumber&quot;, &quot;additionalProperty&quot;: &quot;PONumber&quot;, &quot;description&quot;: &quot;PONumber&quot;}"/>
 					        </customData>
@@ -444,7 +437,6 @@
 								<ObjectIdentifier title="{ReceivingLocation}"/>
                                 <ObjectIdentifier title="{VSRNumber}"/>
                                 <ObjectIdentifier title="{BuyerNumber}"/>
-                                <ObjectIdentifier title="{ArticleNumber}"/>
 								<ObjectIdentifier title="{ItemDescription}" text="{Item}"/>
 								<ObjectNumber number="{ parts:[ {path:'OrdQty'}, {path: 'RetailUnits'} ], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false} }" unit="{RetailUnits}"/>
 								<VBox >

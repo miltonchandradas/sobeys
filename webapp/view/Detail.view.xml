@@ -70,17 +70,12 @@
                                     <Text text="Mar 3, 2021"/>
                                     <Label text="Order Date"/>
                                     <Text text="Feb 4, 2021"/>
-                                    <core:Title text="Recent Order History"/>
-                                    <Label text="Mar 3, 2021"/>
-                                    <Text text="6 BOXES"/>
-                                    <Label text="Total cost of PO"/>
-                                    <Text text="689.12 CAD"/>
-   
-                                    <Label text="April 21, 2021"/>
-                                    <Text text="20 BOXES"/>
-                                    <Label text="May 4, 2021"/>
-                                    <Text text="22 BOXES"/>
-                                </form:content>
+                                    <core:Title text="Existing Open Purchase Orders"/>
+                                    <Label text="Jun 23, 2021"/>
+                                    <Text text="6 BOXES (30 EA) "/>
+                                    <Label text="Jun 22, 2021"/>
+                                    <Text text="10 BOXES (50 EA)"/>
+                               </form:content>
                             </form:SimpleForm>
                         </VBox>
                     </uxap:ObjectPageSubSection>
